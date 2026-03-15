@@ -4,939 +4,279 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>CyberSec Career Wiki — by krakeninfosec</title>
-<meta name="description" content="The most structured cybersecurity career roadmap on the internet. 126 roles, 5 pillars, complete wiki."/>
+<meta name="description" content="The most structured cybersecurity career roadmap. 126 roles, 5 pillars."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --bg:#040d1a;
-  --bg2:#071428;
-  --bg3:#0a1f3d;
-  --cyan:#00d4ff;
-  --cyan2:#00ffea;
-  --cyan-dim:rgba(0,212,255,0.12);
-  --cyan-glow:rgba(0,212,255,0.25);
-  --red:#ff3c5a;
-  --green:#00ff88;
-  --amber:#ffb800;
-  --purple:#c084fc;
-  --text:#c8e6f0;
-  --text-dim:#4a7a8a;
-  --border:rgba(0,212,255,0.12);
-  --border-bright:rgba(0,212,255,0.35);
+  --bg:#040d1a;--bg2:#071428;--bg3:#0a1f3d;
+  --cyan:#00d4ff;--cyan2:#00ffea;--cyan-dim:rgba(0,212,255,0.12);
+  --red:#ff3c5a;--green:#00ff88;--amber:#ffb800;--purple:#c084fc;
+  --text:#d8eef5;--text-mid:#8ab4c4;--text-dim:#4a7a8a;
+  --border:rgba(0,212,255,0.12);--border-bright:rgba(0,212,255,0.4);
   --font-mono:'Share Tech Mono',monospace;
   --font-main:'Rajdhani',sans-serif;
   --font-display:'Orbitron',monospace;
-  --sidebar:240px;
+  --sidebar-w:260px;
 }
-
-html{scroll-behavior:smooth;}
-
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:var(--font-main);
-  min-height:100vh;
-  overflow-x:hidden;
-}
-
-/* SCROLLBAR */
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-main);min-height:100vh;overflow-x:hidden;}
 ::-webkit-scrollbar{width:5px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:rgba(0,212,255,0.3);border-radius:3px;}
-::-webkit-scrollbar-thumb:hover{background:rgba(0,212,255,0.6);}
 
-/* CANVAS */
-#bg-canvas{
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  z-index:0;
-  pointer-events:none;
-}
+#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.35;}
+.scanlines{position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,212,255,0.008) 3px,rgba(0,212,255,0.008) 4px);z-index:1;pointer-events:none;}
+.layout{display:flex;min-height:100vh;position:relative;z-index:2;}
 
-/* SCANLINES */
-.scanlines{
-  position:fixed;
-  top:0;left:0;right:0;bottom:0;
-  background:repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 3px,
-    rgba(0,212,255,0.01) 3px,
-    rgba(0,212,255,0.01) 4px
-  );
-  z-index:1;
-  pointer-events:none;
-}
+/* MOBILE NAV */
+.mobile-nav{display:none;position:fixed;top:0;left:0;right:0;height:56px;background:rgba(4,13,26,0.97);border-bottom:1px solid var(--border);align-items:center;justify-content:space-between;padding:0 20px;z-index:200;}
+.mobile-logo{font-family:var(--font-display);font-size:14px;font-weight:900;color:#fff;}
+.mobile-logo em{color:var(--cyan);font-style:normal;}
+.hamburger{width:36px;height:36px;display:flex;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:6px;}
+.hamburger span{display:block;height:2px;background:var(--cyan);border-radius:2px;transition:all 0.3s;}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:98;}
+.overlay.show{display:block;}
 
-/* LAYOUT */
-.layout{
-  display:flex;
-  min-height:100vh;
-  position:relative;
-  z-index:2;
-}
+/* SIDEBAR */
+.sidebar{width:var(--sidebar-w);min-width:var(--sidebar-w);background:rgba(4,13,26,0.97);border-right:1px solid var(--border);position:fixed;top:0;left:0;height:100vh;display:flex;flex-direction:column;z-index:99;transition:transform 0.3s ease;}
+.sidebar::after{content:'';position:absolute;top:0;right:-1px;width:1px;height:100%;background:linear-gradient(180deg,transparent,var(--cyan),transparent);animation:sideGlow 4s ease-in-out infinite;opacity:0.5;}
+@keyframes sideGlow{0%,100%{opacity:0.2}50%{opacity:0.7}}
 
-/* ─── SIDEBAR ─── */
-.sidebar{
-  width:var(--sidebar);
-  min-width:var(--sidebar);
-  background:rgba(4,13,26,0.97);
-  border-right:1px solid var(--border);
-  position:fixed;
-  top:0;left:0;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
-  z-index:100;
-}
+.sidebar-logo{padding:24px 20px 18px;border-bottom:1px solid var(--border);}
+.logo-eyebrow{font-family:var(--font-mono);font-size:10px;color:var(--cyan);letter-spacing:3px;opacity:0.7;margin-bottom:8px;}
+.logo-name{font-family:var(--font-display);font-size:15px;font-weight:900;color:#fff;letter-spacing:1px;line-height:1.3;}
+.logo-name em{color:var(--cyan);font-style:normal;}
+.logo-sub{font-family:var(--font-mono);font-size:10px;color:var(--text-dim);margin-top:5px;letter-spacing:1px;}
 
-/* Vertical glow line on sidebar edge */
-.sidebar::after{
-  content:'';
-  position:absolute;
-  top:0;right:-1px;
-  width:1px;height:100%;
-  background:linear-gradient(180deg,
-    transparent 0%,
-    var(--cyan) 30%,
-    var(--cyan2) 50%,
-    var(--cyan) 70%,
-    transparent 100%
-  );
-  animation:sideGlow 4s ease-in-out infinite;
-  opacity:0.6;
-}
-@keyframes sideGlow{
-  0%,100%{opacity:0.3;transform:scaleY(0.8);}
-  50%{opacity:0.8;transform:scaleY(1);}
-}
+.sys-status{display:flex;align-items:center;gap:8px;padding:9px 20px;background:rgba(0,255,136,0.04);border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:10px;color:var(--text-mid);letter-spacing:1px;}
+.status-pulse{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s ease-in-out infinite;flex-shrink:0;}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 8px var(--green)}50%{opacity:0.4;box-shadow:0 0 3px var(--green)}}
 
-.sidebar-logo{
-  padding:22px 18px 16px;
-  border-bottom:1px solid var(--border);
-}
-.logo-eyebrow{
-  font-family:var(--font-mono);
-  font-size:9px;
-  color:var(--cyan);
-  letter-spacing:3px;
-  text-transform:uppercase;
-  opacity:0.7;
-  margin-bottom:6px;
-}
-.logo-name{
-  font-family:var(--font-display);
-  font-size:14px;
-  font-weight:700;
-  color:#fff;
-  letter-spacing:1px;
-  line-height:1.3;
-}
-.logo-name em{
-  color:var(--cyan);
-  font-style:normal;
-}
-.logo-sub{
-  font-family:var(--font-mono);
-  font-size:9px;
-  color:var(--text-dim);
-  margin-top:4px;
-  letter-spacing:1px;
-}
-
-.sys-status{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  padding:8px 18px;
-  background:rgba(0,255,136,0.04);
-  border-bottom:1px solid var(--border);
-  font-family:var(--font-mono);
-  font-size:9px;
-  color:var(--text-dim);
-  letter-spacing:1px;
-}
-.status-pulse{
-  width:7px;height:7px;
-  border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 8px var(--green);
-  animation:pulse 2s ease-in-out infinite;
-  flex-shrink:0;
-}
-@keyframes pulse{
-  0%,100%{opacity:1;box-shadow:0 0 8px var(--green);}
-  50%{opacity:0.5;box-shadow:0 0 3px var(--green);}
-}
-
-.nav-wrap{
-  flex:1;
-  overflow-y:auto;
-  padding:10px 0;
-}
+.nav-wrap{flex:1;overflow-y:auto;padding:12px 0;}
 .nav-wrap::-webkit-scrollbar{width:0;}
-
-.nav-group{margin-bottom:4px;}
-.nav-group-label{
-  font-family:var(--font-mono);
-  font-size:8px;
-  color:var(--text-dim);
-  letter-spacing:2.5px;
-  text-transform:uppercase;
-  padding:10px 18px 5px;
-  opacity:0.6;
-}
-
-.nav-link{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:9px 18px;
-  cursor:pointer;
-  text-decoration:none;
-  color:var(--text-dim);
-  font-size:13px;
-  font-weight:500;
-  letter-spacing:0.3px;
-  border-left:2px solid transparent;
-  transition:all 0.2s ease;
-  position:relative;
-  overflow:hidden;
-}
-.nav-link::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(90deg,var(--cyan-dim),transparent);
-  opacity:0;
-  transition:opacity 0.2s;
-}
+.nav-group-label{font-family:var(--font-mono);font-size:9px;color:var(--text-dim);letter-spacing:2.5px;text-transform:uppercase;padding:12px 20px 6px;opacity:0.6;}
+.nav-link{display:flex;align-items:center;gap:12px;padding:11px 20px;cursor:pointer;color:var(--text-mid);font-size:15px;font-weight:500;border-left:2px solid transparent;transition:all 0.2s;position:relative;overflow:hidden;text-decoration:none;}
+.nav-link::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--cyan-dim),transparent);opacity:0;transition:opacity 0.2s;}
 .nav-link:hover::before,.nav-link.active::before{opacity:1;}
 .nav-link:hover{color:var(--text);border-left-color:rgba(0,212,255,0.4);}
-.nav-link.active{
-  color:var(--cyan);
-  border-left-color:var(--cyan);
-  background:rgba(0,212,255,0.05);
-}
-.nav-link.active::after{
-  content:'';
-  position:absolute;
-  right:0;top:50%;
-  transform:translateY(-50%);
-  width:2px;height:60%;
-  background:var(--cyan);
-  box-shadow:0 0 8px var(--cyan);
-  border-radius:1px;
-}
+.nav-link.active{color:var(--cyan);border-left-color:var(--cyan);}
+.nav-icon{font-size:16px;width:22px;text-align:center;flex-shrink:0;}
+.nav-text{flex:1;font-size:15px;}
+.nav-badge{font-family:var(--font-mono);font-size:10px;background:var(--cyan-dim);color:var(--cyan);border:1px solid rgba(0,212,255,0.2);padding:2px 8px;border-radius:3px;flex-shrink:0;}
+.nav-divider{height:1px;background:var(--border);margin:8px 20px;}
 
-.nav-icon{
-  font-size:14px;
-  width:20px;
-  text-align:center;
-  flex-shrink:0;
-}
-.nav-text{flex:1;}
-.nav-badge{
-  font-family:var(--font-mono);
-  font-size:9px;
-  background:var(--cyan-dim);
-  color:var(--cyan);
-  border:1px solid rgba(0,212,255,0.2);
-  padding:1px 6px;
-  border-radius:3px;
-  flex-shrink:0;
-}
-
-.nav-divider{
-  height:1px;
-  background:var(--border);
-  margin:8px 18px;
-}
-
-.sidebar-footer{
-  padding:12px 18px;
-  border-top:1px solid var(--border);
-  font-family:var(--font-mono);
-  font-size:9px;
-  color:var(--text-dim);
-  line-height:1.8;
-}
-.sidebar-footer a{
-  color:var(--cyan);
-  text-decoration:none;
-  opacity:0.8;
-}
+.sidebar-footer{padding:14px 20px;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:10px;color:var(--text-dim);line-height:2;}
+.sidebar-footer a{color:var(--cyan);text-decoration:none;opacity:0.8;}
 .sidebar-footer a:hover{opacity:1;}
 
-/* ─── MAIN CONTENT ─── */
-.main{
-  margin-left:var(--sidebar);
-  flex:1;
-  min-height:100vh;
-}
-
-/* TOP BAR */
-.topbar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 32px;
-  height:52px;
-  border-bottom:1px solid var(--border);
-  background:rgba(4,13,26,0.9);
-  backdrop-filter:blur(12px);
-  position:sticky;
-  top:0;
-  z-index:50;
-}
-.breadcrumb{
-  font-family:var(--font-mono);
-  font-size:11px;
-  color:var(--text-dim);
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
+/* MAIN */
+.main{margin-left:var(--sidebar-w);flex:1;min-height:100vh;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:54px;border-bottom:1px solid var(--border);background:rgba(4,13,26,0.92);backdrop-filter:blur(12px);position:sticky;top:0;z-index:50;}
+.breadcrumb{font-family:var(--font-mono);font-size:12px;color:var(--text-dim);}
 .breadcrumb span{color:var(--cyan);}
-.breadcrumb-sep{opacity:0.3;}
-
-.topbar-right{
-  display:flex;
-  align-items:center;
-  gap:20px;
-}
-.topbar-stat{
-  display:flex;
-  align-items:center;
-  gap:5px;
-  font-family:var(--font-mono);
-  font-size:10px;
-}
-.topbar-stat-val{color:var(--cyan);font-weight:bold;}
+.topbar-right{display:flex;align-items:center;gap:18px;}
+.topbar-stat{display:flex;align-items:center;gap:5px;font-family:var(--font-mono);font-size:11px;}
+.topbar-stat-val{color:var(--cyan);font-weight:bold;font-size:14px;}
 .topbar-stat-label{color:var(--text-dim);}
+.topbar-tag{font-family:var(--font-mono);font-size:10px;padding:4px 12px;border:1px solid rgba(0,255,136,0.3);border-radius:3px;color:var(--green);background:rgba(0,255,136,0.05);letter-spacing:1px;}
 
-.topbar-tag{
-  font-family:var(--font-mono);
-  font-size:9px;
-  padding:3px 10px;
-  border:1px solid rgba(0,255,136,0.3);
-  border-radius:3px;
-  color:var(--green);
-  background:rgba(0,255,136,0.05);
-  letter-spacing:1px;
-}
-
-/* PAGE CONTENT */
 .page{display:none;}
 .page.active{display:block;}
 
-/* ─── HOME PAGE ─── */
-#page-home{padding:40px 32px;}
-
-/* HERO SECTION */
-.hero{
-  margin-bottom:48px;
-  position:relative;
-}
-.hero-eyebrow{
-  font-family:var(--font-mono);
-  font-size:10px;
-  color:var(--cyan);
-  letter-spacing:4px;
-  text-transform:uppercase;
-  margin-bottom:12px;
-  opacity:0.8;
-}
-.hero-title{
-  font-family:var(--font-display);
-  font-size:clamp(28px,4vw,48px);
-  font-weight:900;
-  line-height:1.05;
-  margin-bottom:14px;
-  letter-spacing:-0.5px;
-}
+/* HOME */
+.home-wrap{padding:44px 36px;}
+.hero{margin-bottom:52px;}
+.hero-eyebrow{font-family:var(--font-mono);font-size:11px;color:var(--cyan);letter-spacing:4px;text-transform:uppercase;margin-bottom:14px;opacity:0.8;}
+.hero-title{font-family:var(--font-display);font-size:clamp(28px,4vw,52px);font-weight:900;line-height:1.08;margin-bottom:16px;}
 .hero-title .line1{color:#fff;}
-.hero-title .line2{
-  color:var(--cyan);
-  text-shadow:0 0 30px rgba(0,212,255,0.4);
-}
-.hero-title .glitch-wrap{
-  display:inline-block;
-  position:relative;
-}
-.hero-title .glitch-wrap::before,
-.hero-title .glitch-wrap::after{
-  content:attr(data-text);
-  position:absolute;
-  top:0;left:0;
-  width:100%;height:100%;
-  font-family:var(--font-display);
-}
-.hero-title .glitch-wrap::before{
-  color:rgba(0,212,255,0.6);
-  animation:glitchTop 5s infinite;
-  clip-path:polygon(0 0,100% 0,100% 40%,0 40%);
-}
-.hero-title .glitch-wrap::after{
-  color:rgba(255,60,90,0.5);
-  animation:glitchBot 5s infinite 0.1s;
-  clip-path:polygon(0 60%,100% 60%,100% 100%,0 100%);
-}
-@keyframes glitchTop{
-  0%,88%,100%{transform:translate(0);}
-  90%{transform:translate(-3px,1px);}
-  92%{transform:translate(2px,-1px);}
-  94%{transform:translate(-1px,2px);}
-  96%{transform:translate(0);}
-}
-@keyframes glitchBot{
-  0%,88%,100%{transform:translate(0);}
-  91%{transform:translate(3px,1px);}
-  93%{transform:translate(-2px,-1px);}
-  95%{transform:translate(1px,0);}
-}
+.hero-title .line2{color:var(--cyan);text-shadow:0 0 30px rgba(0,212,255,0.35);}
+.glitch-wrap{display:inline-block;position:relative;}
+.glitch-wrap::before,.glitch-wrap::after{content:attr(data-text);position:absolute;top:0;left:0;font-family:var(--font-display);}
+.glitch-wrap::before{color:rgba(0,212,255,0.5);animation:gT 5s infinite;clip-path:polygon(0 0,100% 0,100% 40%,0 40%);}
+.glitch-wrap::after{color:rgba(255,60,90,0.45);animation:gB 5s infinite .1s;clip-path:polygon(0 60%,100% 60%,100% 100%,0 100%);}
+@keyframes gT{0%,88%,100%{transform:translate(0)}90%{transform:translate(-3px,1px)}92%{transform:translate(2px,-1px)}94%{transform:translate(0)}}
+@keyframes gB{0%,88%,100%{transform:translate(0)}91%{transform:translate(3px,1px)}93%{transform:translate(-2px,-1px)}95%{transform:translate(0)}}
 
-.hero-typing{
-  font-family:var(--font-mono);
-  font-size:14px;
-  color:var(--text-dim);
-  margin-bottom:28px;
-  min-height:22px;
-}
+.hero-typing{font-family:var(--font-mono);font-size:15px;color:var(--text-dim);margin-bottom:20px;min-height:24px;}
 .hero-typing .typed{color:var(--cyan2);}
-.hero-cursor{
-  display:inline-block;
-  width:9px;height:16px;
-  background:var(--cyan);
-  margin-left:2px;
-  vertical-align:middle;
-  animation:blink 1s step-end infinite;
-}
+.cursor{display:inline-block;width:9px;height:17px;background:var(--cyan);margin-left:2px;vertical-align:middle;animation:blink 1s step-end infinite;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 
-.hero-desc{
-  font-size:16px;
-  color:var(--text-dim);
-  line-height:1.7;
-  max-width:600px;
-  margin-bottom:28px;
-}
+.hero-desc{font-size:17px;color:var(--text-mid);line-height:1.8;max-width:620px;margin-bottom:28px;}
 .hero-desc strong{color:var(--text);}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;font-family:var(--font-mono);font-size:13px;letter-spacing:1px;border-radius:4px;cursor:pointer;text-decoration:none;transition:all 0.2s;border:none;}
+.btn-primary{background:var(--cyan);color:#040d1a;font-weight:700;box-shadow:0 0 20px rgba(0,212,255,0.2);}
+.btn-primary:hover{background:var(--cyan2);box-shadow:0 0 32px rgba(0,212,255,0.4);transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--cyan);border:1px solid rgba(0,212,255,0.4);}
+.btn-outline:hover{background:var(--cyan-dim);border-color:var(--cyan);transform:translateY(-2px);}
 
-.hero-actions{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-}
-.btn{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:11px 22px;
-  font-family:var(--font-mono);
-  font-size:12px;
-  letter-spacing:1px;
-  border-radius:4px;
-  cursor:pointer;
-  text-decoration:none;
-  transition:all 0.2s;
-  border:none;
-  font-weight:400;
-}
-.btn-primary{
-  background:var(--cyan);
-  color:#040d1a;
-  font-weight:700;
-  box-shadow:0 0 20px rgba(0,212,255,0.25);
-}
-.btn-primary:hover{
-  background:var(--cyan2);
-  box-shadow:0 0 30px rgba(0,212,255,0.45);
-  transform:translateY(-1px);
-}
-.btn-outline{
-  background:transparent;
-  color:var(--cyan);
-  border:1px solid rgba(0,212,255,0.4);
-}
-.btn-outline:hover{
-  background:var(--cyan-dim);
-  border-color:var(--cyan);
-  box-shadow:0 0 16px rgba(0,212,255,0.15);
-  transform:translateY(-1px);
-}
-
-/* STATS ROW */
-.stats-row{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
-  margin-bottom:48px;
-}
-.stat-card{
-  background:rgba(10,31,61,0.5);
-  border:1px solid var(--border);
-  border-radius:6px;
-  padding:18px 16px;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-  transition:all 0.25s;
-}
-.stat-card::before{
-  content:'';
-  position:absolute;
-  top:0;left:0;right:0;
-  height:2px;
-  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
-  opacity:0;
-  transition:opacity 0.3s;
-}
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:52px;}
+.stat-card{background:rgba(10,31,61,0.55);border:1px solid var(--border);border-radius:8px;padding:22px 16px;text-align:center;transition:all 0.25s;position:relative;overflow:hidden;}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:opacity 0.3s;}
 .stat-card:hover::before{opacity:1;}
-.stat-card:hover{
-  border-color:var(--border-bright);
-  background:rgba(0,212,255,0.06);
-  transform:translateY(-3px);
-  box-shadow:0 12px 32px rgba(0,212,255,0.1);
-}
-.stat-num{
-  font-family:var(--font-display);
-  font-size:36px;
-  font-weight:900;
-  color:var(--cyan);
-  line-height:1;
-  margin-bottom:6px;
-  text-shadow:0 0 20px rgba(0,212,255,0.4);
-}
-.stat-label{
-  font-family:var(--font-mono);
-  font-size:9px;
-  color:var(--text-dim);
-  letter-spacing:2px;
-  text-transform:uppercase;
-}
+.stat-card:hover{border-color:var(--border-bright);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,212,255,0.1);}
+.stat-num{font-family:var(--font-display);font-size:40px;font-weight:900;color:var(--cyan);line-height:1;margin-bottom:8px;text-shadow:0 0 20px rgba(0,212,255,0.35);}
+.stat-label{font-family:var(--font-mono);font-size:12px;color:var(--text-mid);letter-spacing:2px;text-transform:uppercase;}
 
-/* SECTION HEADERS */
-.sec-header{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:20px;
-}
-.sec-line{
-  flex:1;
-  height:1px;
-  background:var(--border);
-}
-.sec-label{
-  font-family:var(--font-mono);
-  font-size:9px;
-  color:var(--text-dim);
-  letter-spacing:3px;
-  text-transform:uppercase;
-  white-space:nowrap;
-}
+/* SECTION HEADER */
+.sec-header{display:flex;align-items:center;gap:14px;margin-bottom:22px;}
+.sec-line{flex:1;height:1px;background:var(--border);}
+.sec-label{font-family:var(--font-mono);font-size:10px;color:var(--text-dim);letter-spacing:3px;text-transform:uppercase;white-space:nowrap;}
 
 /* PILLAR CARDS */
-.pillars-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:16px;
-  margin-bottom:48px;
-}
-.pillar-card{
-  background:rgba(7,20,40,0.7);
-  border:1px solid var(--border);
-  border-radius:8px;
-  padding:22px;
-  cursor:pointer;
-  transition:all 0.25s;
-  position:relative;
-  overflow:hidden;
-  text-decoration:none;
-  display:block;
-}
-.pillar-card::before{
-  content:'';
-  position:absolute;
-  top:0;left:-100%;
-  width:60%;height:2px;
-  transition:left 0.5s ease;
-}
+.pillars-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:52px;}
+.pillar-card{background:rgba(7,20,40,0.7);border:1px solid var(--border);border-radius:8px;padding:24px;cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden;display:block;text-decoration:none;}
+.pillar-card::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:2px;transition:left 0.5s ease;}
 .pillar-card:hover::before{left:120%;}
-.pillar-card.p-red::before{background:linear-gradient(90deg,transparent,var(--red),transparent);}
-.pillar-card.p-cyan::before{background:linear-gradient(90deg,transparent,var(--cyan),transparent);}
-.pillar-card.p-green::before{background:linear-gradient(90deg,transparent,var(--green),transparent);}
-.pillar-card.p-amber::before{background:linear-gradient(90deg,transparent,var(--amber),transparent);}
-.pillar-card.p-purple::before{background:linear-gradient(90deg,transparent,var(--purple),transparent);}
-
-.pillar-card:hover{
-  transform:translateY(-4px);
-}
-.pillar-card.p-red:hover{border-color:rgba(255,60,90,0.4);box-shadow:0 12px 32px rgba(255,60,90,0.12);}
-.pillar-card.p-cyan:hover{border-color:rgba(0,212,255,0.4);box-shadow:0 12px 32px rgba(0,212,255,0.12);}
-.pillar-card.p-green:hover{border-color:rgba(0,255,136,0.4);box-shadow:0 12px 32px rgba(0,255,136,0.12);}
-.pillar-card.p-amber:hover{border-color:rgba(255,184,0,0.4);box-shadow:0 12px 32px rgba(255,184,0,0.12);}
-.pillar-card.p-purple:hover{border-color:rgba(192,132,252,0.4);box-shadow:0 12px 32px rgba(192,132,252,0.12);}
-
-.pillar-card.full-width{grid-column:span 2;}
-
-.pc-top{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  margin-bottom:12px;
-}
-.pc-icon{font-size:24px;}
-.pc-tag{
-  font-family:var(--font-mono);
-  font-size:9px;
-  padding:3px 8px;
-  border-radius:3px;
-  border:1px solid;
-  letter-spacing:1px;
-}
+.p-red::before{background:linear-gradient(90deg,transparent,var(--red),transparent);}
+.p-cyan::before{background:linear-gradient(90deg,transparent,var(--cyan),transparent);}
+.p-green::before{background:linear-gradient(90deg,transparent,var(--green),transparent);}
+.p-amber::before{background:linear-gradient(90deg,transparent,var(--amber),transparent);}
+.p-purple::before{background:linear-gradient(90deg,transparent,var(--purple),transparent);}
+.pillar-card:hover{transform:translateY(-4px);}
+.p-red:hover{border-color:rgba(255,60,90,0.4);box-shadow:0 12px 32px rgba(255,60,90,0.1);}
+.p-cyan:hover{border-color:rgba(0,212,255,0.4);box-shadow:0 12px 32px rgba(0,212,255,0.1);}
+.p-green:hover{border-color:rgba(0,255,136,0.4);box-shadow:0 12px 32px rgba(0,255,136,0.1);}
+.p-amber:hover{border-color:rgba(255,184,0,0.4);box-shadow:0 12px 32px rgba(255,184,0,0.1);}
+.p-purple:hover{border-color:rgba(192,132,252,0.4);box-shadow:0 12px 32px rgba(192,132,252,0.1);}
+.full-width{grid-column:span 2;}
+.pc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;}
+.pc-icon{font-size:26px;}
+.pc-tag{font-family:var(--font-mono);font-size:10px;padding:4px 10px;border-radius:3px;border:1px solid;letter-spacing:1px;}
 .tag-red{color:var(--red);border-color:rgba(255,60,90,0.3);background:rgba(255,60,90,0.07);}
 .tag-cyan{color:var(--cyan);border-color:rgba(0,212,255,0.3);background:rgba(0,212,255,0.07);}
 .tag-green{color:var(--green);border-color:rgba(0,255,136,0.3);background:rgba(0,255,136,0.07);}
 .tag-amber{color:var(--amber);border-color:rgba(255,184,0,0.3);background:rgba(255,184,0,0.07);}
 .tag-purple{color:var(--purple);border-color:rgba(192,132,252,0.3);background:rgba(192,132,252,0.07);}
-
-.pc-name{
-  font-family:var(--font-display);
-  font-size:15px;
-  font-weight:700;
-  color:#fff;
-  letter-spacing:0.5px;
-  margin-bottom:6px;
-}
-.pc-desc{
-  font-size:12px;
-  color:var(--text-dim);
-  line-height:1.6;
-  margin-bottom:14px;
-}
-.pc-footer{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-.pc-meta{
-  font-family:var(--font-mono);
-  font-size:10px;
-  color:var(--text-dim);
-}
-.pc-meta b{color:var(--text);}
-.pc-arrow{
-  font-family:var(--font-mono);
-  font-size:11px;
-  color:var(--cyan);
-  opacity:0;
-  transform:translateX(-6px);
-  transition:all 0.2s;
-  letter-spacing:1px;
-}
+.pc-name{font-family:var(--font-display);font-size:16px;font-weight:700;color:#fff;letter-spacing:0.5px;margin-bottom:8px;}
+.pc-desc{font-size:14px;color:var(--text-mid);line-height:1.7;margin-bottom:16px;}
+.pc-footer{display:flex;align-items:center;justify-content:space-between;}
+.pc-meta{font-family:var(--font-mono);font-size:12px;color:var(--text-dim);}
+.pc-meta b{color:var(--text-mid);}
+.pc-arrow{font-family:var(--font-mono);font-size:12px;color:var(--cyan);opacity:0;transform:translateX(-6px);transition:all 0.2s;}
 .pillar-card:hover .pc-arrow{opacity:1;transform:translateX(0);}
 
-/* PROGRESS SECTION */
-.progress-section{margin-bottom:48px;}
-.progress-item{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  padding:12px 0;
-  border-bottom:1px solid rgba(255,255,255,0.03);
-}
-.pi-name{
-  font-size:13px;
-  font-weight:600;
-  color:var(--text);
-  width:200px;
-  flex-shrink:0;
-}
+/* PROGRESS */
+.progress-section{margin-bottom:52px;}
+.progress-item{display:flex;align-items:center;gap:18px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.03);}
+.pi-name{font-size:15px;font-weight:600;color:var(--text);width:210px;flex-shrink:0;}
 .pi-bar-wrap{flex:1;}
-.pi-track{
-  height:5px;
-  background:rgba(255,255,255,0.05);
-  border-radius:3px;
-  overflow:hidden;
-}
-.pi-fill{
-  height:100%;
-  border-radius:3px;
-  width:0;
-  transition:width 1.8s cubic-bezier(0.4,0,0.2,1);
-  position:relative;
-}
-.pi-fill::after{
-  content:'';
-  position:absolute;
-  right:0;top:0;
-  width:6px;height:100%;
-  background:rgba(255,255,255,0.6);
-  border-radius:3px;
-  filter:blur(2px);
-}
-.fill-r{background:linear-gradient(90deg,rgba(255,60,90,0.6),var(--red));}
-.fill-c{background:linear-gradient(90deg,rgba(0,212,255,0.6),var(--cyan));}
-.fill-g{background:linear-gradient(90deg,rgba(0,200,150,0.6),#00c896);}
-.fill-a{background:linear-gradient(90deg,rgba(255,184,0,0.6),var(--amber));}
-.fill-p{background:linear-gradient(90deg,rgba(192,132,252,0.6),var(--purple));}
-.pi-count{
-  font-family:var(--font-mono);
-  font-size:10px;
-  color:var(--text-dim);
-  width:60px;
-  text-align:right;
-  flex-shrink:0;
-}
+.pi-track{height:6px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden;}
+.pi-fill{height:100%;border-radius:4px;width:0;transition:width 1.8s cubic-bezier(0.4,0,0.2,1);}
+.fill-r{background:linear-gradient(90deg,rgba(255,60,90,0.5),var(--red));}
+.fill-c{background:linear-gradient(90deg,rgba(0,212,255,0.5),var(--cyan));}
+.fill-g{background:linear-gradient(90deg,rgba(0,200,150,0.5),#00c896);}
+.fill-a{background:linear-gradient(90deg,rgba(255,184,0,0.5),var(--amber));}
+.fill-p{background:linear-gradient(90deg,rgba(192,132,252,0.5),var(--purple));}
+.pi-count{font-family:var(--font-mono);font-size:12px;color:var(--text-dim);width:64px;text-align:right;flex-shrink:0;}
 
-/* ROADMAP SECTION */
-.roadmap-grid{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:8px;
-  margin-bottom:48px;
-}
-.rm-stage{
-  background:rgba(10,31,61,0.5);
-  border:1px solid var(--border);
-  border-radius:6px;
-  padding:14px 10px;
-  text-align:center;
-  transition:all 0.2s;
-  cursor:default;
-}
-.rm-stage:hover{
-  border-color:var(--border-bright);
-  background:rgba(0,212,255,0.06);
-  transform:translateY(-3px);
-  box-shadow:0 8px 20px rgba(0,212,255,0.1);
-}
-.rm-num{
-  font-family:var(--font-display);
-  font-size:20px;
-  font-weight:900;
-  color:var(--cyan);
-  opacity:0.4;
-  margin-bottom:6px;
-}
-.rm-title{
-  font-family:var(--font-mono);
-  font-size:9px;
-  color:var(--text);
-  letter-spacing:0.5px;
-  line-height:1.4;
-  margin-bottom:8px;
-}
-.rm-arrow{
-  font-size:14px;
-  color:var(--text-dim);
-  opacity:0.4;
-}
+/* ROADMAP */
+.roadmap-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-bottom:52px;}
+.rm-stage{background:rgba(10,31,61,0.5);border:1px solid var(--border);border-radius:6px;padding:16px 10px;text-align:center;transition:all 0.2s;cursor:default;}
+.rm-stage:hover{border-color:var(--border-bright);background:rgba(0,212,255,0.06);transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,212,255,0.1);}
+.rm-num{font-family:var(--font-display);font-size:22px;font-weight:900;color:var(--cyan);opacity:0.35;margin-bottom:8px;}
+.rm-title{font-family:var(--font-mono);font-size:10px;color:var(--text-mid);line-height:1.5;}
 
 /* FOOTER */
-.footer{
-  border-top:1px solid var(--border);
-  padding:28px 32px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  font-family:var(--font-mono);
-  font-size:10px;
-  color:var(--text-dim);
-}
+.footer{border-top:1px solid var(--border);padding:28px 36px;display:flex;align-items:center;justify-content:space-between;font-family:var(--font-mono);font-size:12px;color:var(--text-dim);}
 .footer a{color:var(--cyan);text-decoration:none;opacity:0.8;}
 .footer a:hover{opacity:1;}
 
-/* ─── OFFENSIVE PAGE ─── */
-#page-offensive{padding:40px 32px;}
+/* OFFENSIVE PAGE */
+.off-wrap{padding:44px 36px;}
+.pillar-hero{padding:36px;background:linear-gradient(135deg,rgba(255,60,90,0.06) 0%,transparent 60%);border:1px solid rgba(255,60,90,0.15);border-radius:8px;margin-bottom:40px;position:relative;overflow:hidden;}
+.pillar-hero::before{content:'';position:absolute;top:-50%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(255,60,90,0.05) 0%,transparent 70%);pointer-events:none;}
+.ph-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;color:var(--red);opacity:0.8;}
+.ph-title{font-family:var(--font-display);font-size:36px;font-weight:900;color:#fff;margin-bottom:10px;}
+.ph-sub{font-size:16px;color:var(--text-mid);line-height:1.75;max-width:580px;margin-bottom:20px;}
+.ph-badges{display:flex;gap:10px;flex-wrap:wrap;}
+.ph-badge{font-family:var(--font-mono);font-size:10px;padding:4px 12px;border-radius:3px;border:1px solid;letter-spacing:1px;}
+.subtopics{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:40px;}
+.st-card{background:rgba(7,20,40,0.6);border:1px solid var(--border);border-radius:6px;padding:20px;cursor:pointer;transition:all 0.2s;}
+.st-card:hover{border-color:rgba(255,60,90,0.35);background:rgba(255,60,90,0.05);transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,60,90,0.08);}
+.st-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.st-name{font-size:15px;font-weight:700;color:#fff;}
+.st-count{font-family:var(--font-mono);font-size:10px;color:var(--red);background:rgba(255,60,90,0.08);border:1px solid rgba(255,60,90,0.2);padding:3px 8px;border-radius:3px;}
+.st-roles{display:flex;flex-wrap:wrap;gap:6px;}
+.role-chip{font-size:12px;color:var(--text-mid);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);padding:4px 10px;border-radius:3px;transition:all 0.15s;}
+.st-card:hover .role-chip{border-color:rgba(255,60,90,0.2);color:var(--text);}
+.cert-ladder{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:40px;}
+.cert-box{background:rgba(10,31,61,0.7);border:1px solid var(--border);border-radius:5px;padding:12px 18px;text-align:center;transition:all 0.2s;cursor:default;}
+.cert-box:hover{border-color:var(--border-bright);background:var(--cyan-dim);}
+.cert-name{font-family:var(--font-mono);font-size:13px;color:var(--cyan);font-weight:bold;display:block;margin-bottom:3px;}
+.cert-level{font-size:12px;color:var(--text-dim);}
+.cert-arrow{font-family:var(--font-mono);color:var(--text-dim);padding:0 4px;font-size:14px;opacity:0.4;}
 
-.pillar-hero{
-  padding:32px;
-  background:linear-gradient(135deg,rgba(255,60,90,0.06) 0%,transparent 60%);
-  border:1px solid rgba(255,60,90,0.15);
-  border-radius:8px;
-  margin-bottom:36px;
-  position:relative;
-  overflow:hidden;
-}
-.pillar-hero::before{
-  content:'';
-  position:absolute;
-  top:-50%;right:-10%;
-  width:300px;height:300px;
-  background:radial-gradient(circle,rgba(255,60,90,0.06) 0%,transparent 70%);
-  pointer-events:none;
-}
-.ph-tag{
-  font-family:var(--font-mono);
-  font-size:9px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  margin-bottom:10px;
-  color:var(--red);
-  opacity:0.8;
-}
-.ph-title{
-  font-family:var(--font-display);
-  font-size:32px;
-  font-weight:900;
-  color:#fff;
-  margin-bottom:8px;
-}
-.ph-sub{
-  font-size:14px;
-  color:var(--text-dim);
-  line-height:1.6;
-  max-width:560px;
-  margin-bottom:18px;
-}
-.ph-badges{display:flex;gap:8px;flex-wrap:wrap;}
-.ph-badge{
-  font-family:var(--font-mono);
-  font-size:9px;
-  padding:3px 10px;
-  border-radius:3px;
-  border:1px solid;
-  letter-spacing:1px;
-}
+/* COMING SOON */
+.coming-wrap{padding:100px 36px;text-align:center;}
+.coming-tag{font-family:var(--font-mono);font-size:11px;color:var(--cyan);letter-spacing:4px;margin-bottom:18px;opacity:0.7;}
+.coming-title{font-family:var(--font-display);font-size:42px;font-weight:900;color:#fff;margin-bottom:14px;}
+.coming-desc{font-size:17px;color:var(--text-mid);max-width:420px;margin:0 auto 32px;line-height:1.75;}
 
-/* SUBTOPIC CARDS */
-.subtopics{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-  margin-bottom:36px;
-}
-.st-card{
-  background:rgba(7,20,40,0.6);
-  border:1px solid var(--border);
-  border-radius:6px;
-  padding:18px;
-  cursor:pointer;
-  transition:all 0.2s;
-}
-.st-card:hover{
-  border-color:rgba(255,60,90,0.35);
-  background:rgba(255,60,90,0.05);
-  transform:translateY(-2px);
-  box-shadow:0 8px 24px rgba(255,60,90,0.08);
-}
-.st-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:8px;
-}
-.st-name{
-  font-size:14px;
-  font-weight:700;
-  color:#fff;
-  letter-spacing:0.3px;
-}
-.st-count{
-  font-family:var(--font-mono);
-  font-size:9px;
-  color:var(--red);
-  background:rgba(255,60,90,0.08);
-  border:1px solid rgba(255,60,90,0.2);
-  padding:2px 7px;
-  border-radius:3px;
-}
-.st-roles{
-  display:flex;
-  flex-wrap:wrap;
-  gap:5px;
-}
-.role-chip{
-  font-size:11px;
-  color:var(--text-dim);
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.06);
-  padding:2px 8px;
-  border-radius:3px;
-  transition:all 0.15s;
-}
-.st-card:hover .role-chip{
-  border-color:rgba(255,60,90,0.2);
-  color:var(--text);
-}
-
-/* CERT LADDER */
-.cert-ladder{
-  display:flex;
-  align-items:center;
-  gap:0;
-  flex-wrap:wrap;
-  margin-bottom:36px;
-}
-.cert-step{
-  display:flex;
-  align-items:center;
-  gap:0;
-}
-.cert-box{
-  background:rgba(10,31,61,0.7);
-  border:1px solid var(--border);
-  border-radius:5px;
-  padding:10px 14px;
-  text-align:center;
-  transition:all 0.2s;
-  cursor:default;
-}
-.cert-box:hover{
-  border-color:var(--border-bright);
-  background:var(--cyan-dim);
-  box-shadow:0 4px 16px rgba(0,212,255,0.12);
-}
-.cert-name{
-  font-family:var(--font-mono);
-  font-size:11px;
-  color:var(--cyan);
-  font-weight:bold;
-  display:block;
-  margin-bottom:2px;
-}
-.cert-level{
-  font-size:9px;
-  color:var(--text-dim);
-  letter-spacing:0.5px;
-}
-.cert-arrow{
-  font-family:var(--font-mono);
-  color:var(--text-dim);
-  padding:0 6px;
-  font-size:12px;
-  opacity:0.4;
-}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-  :root{--sidebar:0px;}
-  .sidebar{transform:translateX(-100%);}
-  .main{margin-left:0;}
+/* ══ RESPONSIVE ══ */
+@media(max-width:1024px){
   .stats-row{grid-template-columns:repeat(2,1fr);}
-  .pillars-grid{grid-template-columns:1fr;}
-  .pillar-card.full-width{grid-column:span 1;}
   .roadmap-grid{grid-template-columns:repeat(4,1fr);}
+}
+@media(max-width:768px){
+  :root{--sidebar-w:0px;}
+  .mobile-nav{display:flex;}
+  .sidebar{transform:translateX(-100%);width:280px;min-width:280px;}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;padding-top:56px;}
+  .topbar{display:none;}
+  .home-wrap,.off-wrap{padding:24px 18px;}
+  .coming-wrap{padding:60px 18px;}
+  .footer{padding:20px 18px;flex-direction:column;gap:10px;text-align:center;}
+  .hero-title{font-size:clamp(24px,7vw,34px);}
+  .hero-desc{font-size:15px;}
+  .hero-btns{flex-direction:column;}
+  .btn{justify-content:center;padding:14px 20px;font-size:13px;}
+  .stats-row{grid-template-columns:repeat(2,1fr);gap:10px;}
+  .stat-num{font-size:32px;}
+  .stat-label{font-size:11px;}
+  .pillars-grid{grid-template-columns:1fr;}
+  .full-width{grid-column:span 1;}
+  .pc-name{font-size:15px;}
+  .pc-desc{font-size:14px;}
+  .progress-item{flex-wrap:wrap;gap:8px;}
+  .pi-name{width:100%;font-size:15px;}
+  .pi-count{width:auto;margin-left:auto;}
+  .roadmap-grid{grid-template-columns:repeat(2,1fr);}
   .subtopics{grid-template-columns:1fr;}
+  .cert-ladder{flex-direction:column;align-items:flex-start;}
+  .ph-title{font-size:26px;}
+  .ph-sub{font-size:15px;}
+  .coming-title{font-size:30px;}
+  .coming-desc{font-size:15px;}
+}
+@media(max-width:400px){
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .stat-num{font-size:28px;}
 }
 </style>
 </head>
 <body>
-
 <canvas id="bg-canvas"></canvas>
 <div class="scanlines"></div>
 
-<div class="layout">
+<div class="mobile-nav">
+  <div class="mobile-logo">Cyber<em>Sec</em> Wiki</div>
+  <div class="hamburger" id="hamburger" onclick="toggleSidebar()">
+    <span></span><span></span><span></span>
+  </div>
+</div>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-  <!-- ═══ SIDEBAR ═══ -->
-  <aside class="sidebar">
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
     <div class="sidebar-logo">
       <div class="logo-eyebrow">// krakeninfosec</div>
       <div class="logo-name">Cyber<em>Sec</em><br>Career Wiki</div>
@@ -944,447 +284,207 @@ body{
     </div>
     <div class="sys-status">
       <div class="status-pulse"></div>
-      <span>SYSTEM ONLINE — ACTIVE BUILD</span>
+      <span>SYSTEM ONLINE</span>
     </div>
     <nav class="nav-wrap">
-      <div class="nav-group">
-        <div class="nav-group-label">// Main</div>
-        <a class="nav-link active" onclick="showPage('home')">
-          <span class="nav-icon">⌂</span>
-          <span class="nav-text">Overview</span>
-        </a>
-      </div>
+      <div class="nav-group-label">// Main</div>
+      <a class="nav-link active" onclick="showPage('home');closeSidebar()">
+        <span class="nav-icon">⌂</span><span class="nav-text">Overview</span>
+      </a>
       <div class="nav-divider"></div>
-      <div class="nav-group">
-        <div class="nav-group-label">// 5 Pillars</div>
-        <a class="nav-link" onclick="showPage('offensive')">
-          <span class="nav-icon">⚔</span>
-          <span class="nav-text">Offensive Security</span>
-          <span class="nav-badge">37</span>
-        </a>
-        <a class="nav-link" onclick="showPage('coming')">
-          <span class="nav-icon">🛡</span>
-          <span class="nav-text">Defensive Security</span>
-          <span class="nav-badge">19</span>
-        </a>
-        <a class="nav-link" onclick="showPage('coming')">
-          <span class="nav-icon">⚙</span>
-          <span class="nav-text">Sec Engineering</span>
-          <span class="nav-badge">30</span>
-        </a>
-        <a class="nav-link" onclick="showPage('coming')">
-          <span class="nav-icon">📋</span>
-          <span class="nav-text">GRC</span>
-          <span class="nav-badge">20</span>
-        </a>
-        <a class="nav-link" onclick="showPage('coming')">
-          <span class="nav-icon">🔍</span>
-          <span class="nav-text">Threat Intel</span>
-          <span class="nav-badge">20</span>
-        </a>
-      </div>
+      <div class="nav-group-label">// 5 Pillars</div>
+      <a class="nav-link" onclick="showPage('offensive');closeSidebar()">
+        <span class="nav-icon">⚔</span><span class="nav-text">Offensive Security</span><span class="nav-badge">37</span>
+      </a>
+      <a class="nav-link" onclick="showPage('coming');closeSidebar()">
+        <span class="nav-icon">🛡</span><span class="nav-text">Defensive Security</span><span class="nav-badge">19</span>
+      </a>
+      <a class="nav-link" onclick="showPage('coming');closeSidebar()">
+        <span class="nav-icon">⚙</span><span class="nav-text">Sec Engineering</span><span class="nav-badge">30</span>
+      </a>
+      <a class="nav-link" onclick="showPage('coming');closeSidebar()">
+        <span class="nav-icon">📋</span><span class="nav-text">GRC</span><span class="nav-badge">20</span>
+      </a>
+      <a class="nav-link" onclick="showPage('coming');closeSidebar()">
+        <span class="nav-icon">🔍</span><span class="nav-text">Threat Intel</span><span class="nav-badge">20</span>
+      </a>
       <div class="nav-divider"></div>
-      <div class="nav-group">
-        <div class="nav-group-label">// Resources</div>
-        <a class="nav-link" onclick="showPage('coming')">
-          <span class="nav-icon">◈</span>
-          <span class="nav-text">Tools Library</span>
-        </a>
-        <a class="nav-link" onclick="showPage('coming')">
-          <span class="nav-icon">◎</span>
-          <span class="nav-text">Certifications</span>
-        </a>
-        <a class="nav-link" onclick="showPage('coming')">
-          <span class="nav-icon">◉</span>
-          <span class="nav-text">Labs & Practice</span>
-        </a>
-        <a class="nav-link" onclick="showPage('coming')">
-          <span class="nav-icon">◌</span>
-          <span class="nav-text">Roadmaps</span>
-        </a>
-      </div>
+      <div class="nav-group-label">// Resources</div>
+      <a class="nav-link" onclick="showPage('coming');closeSidebar()">
+        <span class="nav-icon">◈</span><span class="nav-text">Tools Library</span>
+      </a>
+      <a class="nav-link" onclick="showPage('coming');closeSidebar()">
+        <span class="nav-icon">◎</span><span class="nav-text">Certifications</span>
+      </a>
+      <a class="nav-link" onclick="showPage('coming');closeSidebar()">
+        <span class="nav-icon">◉</span><span class="nav-text">Labs & Practice</span>
+      </a>
     </nav>
     <div class="sidebar-footer">
       <div>by <a href="https://github.com/krakeninfosec" target="_blank">@krakeninfosec</a></div>
       <div>v1.0 · MIT License</div>
-      <div style="margin-top:4px;opacity:0.5;">Free forever. Always.</div>
     </div>
   </aside>
 
-  <!-- ═══ MAIN ═══ -->
   <main class="main">
-
-    <!-- TOP BAR -->
     <div class="topbar">
-      <div class="breadcrumb" id="breadcrumb">
-        <span>~/</span>cybersec-wiki<span>/</span>overview
-      </div>
+      <div class="breadcrumb" id="breadcrumb"><span>~/</span>cybersec-wiki<span>/</span>overview</div>
       <div class="topbar-right">
-        <div class="topbar-stat">
-          <span class="topbar-stat-val">126</span>
-          <span class="topbar-stat-label">roles</span>
-        </div>
-        <div class="topbar-stat">
-          <span class="topbar-stat-val" id="pct-top">5%</span>
-          <span class="topbar-stat-label">complete</span>
-        </div>
+        <div class="topbar-stat"><span class="topbar-stat-val">126</span><span class="topbar-stat-label">roles</span></div>
+        <div class="topbar-stat"><span class="topbar-stat-val">5%</span><span class="topbar-stat-label">done</span></div>
         <div class="topbar-tag">● ACTIVE BUILD</div>
       </div>
     </div>
 
-    <!-- ═══ HOME PAGE ═══ -->
+    <!-- HOME PAGE -->
     <div class="page active" id="page-home">
-
-      <!-- HERO -->
-      <div style="padding:40px 32px 0;">
+      <div class="home-wrap">
         <div class="hero">
           <div class="hero-eyebrow">// cybersecurity career roadmap</div>
           <div class="hero-title">
             <div class="line1">The Complete</div>
-            <div class="line2">
-              <span class="glitch-wrap" data-text="CyberSec Wiki">CyberSec Wiki</span>
-            </div>
+            <div class="line2"><span class="glitch-wrap" data-text="CyberSec Wiki">CyberSec Wiki</span></div>
           </div>
-          <div class="hero-typing">
-            <span class="typed" id="typed-text"></span><span class="hero-cursor"></span>
-          </div>
-          <p class="hero-desc">
-            The most structured cybersecurity career knowledge base on the internet.
-            <strong>126 roles</strong> across <strong>5 pillars</strong> — every job explained
-            from entry level to expert, with tools, certs, labs, and real career paths.
-          </p>
-          <div class="hero-actions">
-            <button class="btn btn-primary" onclick="showPage('offensive')">
-              ▶ START WITH OFFENSIVE
-            </button>
-            <button class="btn btn-outline" onclick="document.getElementById('pillars-sec').scrollIntoView({behavior:'smooth'})">
-              ◈ EXPLORE ALL PILLARS
-            </button>
+          <div class="hero-typing"><span class="typed" id="typed-text"></span><span class="cursor"></span></div>
+          <p class="hero-desc">The most structured cybersecurity career knowledge base. <strong>126 roles</strong> across <strong>5 pillars</strong> — every job explained from entry level to expert, with tools, certs, labs and real career paths.</p>
+          <div class="hero-btns">
+            <button class="btn btn-primary" onclick="showPage('offensive')">▶ START WITH OFFENSIVE</button>
+            <button class="btn btn-outline" onclick="document.getElementById('pillars-sec').scrollIntoView({behavior:'smooth'})">◈ EXPLORE ALL PILLARS</button>
           </div>
         </div>
 
-        <!-- STATS -->
         <div class="stats-row">
-          <div class="stat-card">
-            <div class="stat-num" id="cnt-roles">0</div>
-            <div class="stat-label">Total Roles</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num" id="cnt-pillars">0</div>
-            <div class="stat-label">Pillars</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num" id="cnt-topics">0</div>
-            <div class="stat-label">Sub-Topics</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num" id="cnt-complete">0</div>
-            <div class="stat-label">Roles Done</div>
-          </div>
+          <div class="stat-card"><div class="stat-num" id="cnt-roles">0</div><div class="stat-label">Total Roles</div></div>
+          <div class="stat-card"><div class="stat-num" id="cnt-pillars">0</div><div class="stat-label">Pillars</div></div>
+          <div class="stat-card"><div class="stat-num" id="cnt-topics">0</div><div class="stat-label">Sub-Topics</div></div>
+          <div class="stat-card"><div class="stat-num" id="cnt-done">0</div><div class="stat-label">Roles Done</div></div>
         </div>
 
-        <!-- PILLARS -->
         <div id="pillars-sec">
-          <div class="sec-header">
-            <div class="sec-label">// 05 pillars — click to explore</div>
-            <div class="sec-line"></div>
-          </div>
+          <div class="sec-header"><div class="sec-label">// 05 pillars — click to explore</div><div class="sec-line"></div></div>
           <div class="pillars-grid">
             <div class="pillar-card p-red" onclick="showPage('offensive')">
-              <div class="pc-top">
-                <span class="pc-icon">⚔️</span>
-                <span class="pc-tag tag-red">ATTACK</span>
-              </div>
+              <div class="pc-top"><span class="pc-icon">⚔️</span><span class="pc-tag tag-red">ATTACK</span></div>
               <div class="pc-name">Offensive Security</div>
               <div class="pc-desc">Pentesting, red teaming, exploit research, hardware hacking, social engineering & adversary simulation.</div>
-              <div class="pc-footer">
-                <div class="pc-meta"><b>37</b> roles · 6 sub-topics</div>
-                <div class="pc-arrow">ENTER →</div>
-              </div>
+              <div class="pc-footer"><div class="pc-meta"><b>37</b> roles · 6 sub-topics</div><div class="pc-arrow">ENTER →</div></div>
             </div>
             <div class="pillar-card p-cyan" onclick="showPage('coming')">
-              <div class="pc-top">
-                <span class="pc-icon">🛡️</span>
-                <span class="pc-tag tag-cyan">DEFEND</span>
-              </div>
+              <div class="pc-top"><span class="pc-icon">🛡️</span><span class="pc-tag tag-cyan">DEFEND</span></div>
               <div class="pc-name">Defensive Security</div>
               <div class="pc-desc">SOC operations, incident response, threat hunting, digital forensics & blue team engineering.</div>
-              <div class="pc-footer">
-                <div class="pc-meta"><b>19</b> roles · 4 sub-topics</div>
-                <div class="pc-arrow">ENTER →</div>
-              </div>
+              <div class="pc-footer"><div class="pc-meta"><b>19</b> roles · 4 sub-topics</div><div class="pc-arrow">ENTER →</div></div>
             </div>
             <div class="pillar-card p-green" onclick="showPage('coming')">
-              <div class="pc-top">
-                <span class="pc-icon">⚙️</span>
-                <span class="pc-tag tag-green">BUILD</span>
-              </div>
+              <div class="pc-top"><span class="pc-icon">⚙️</span><span class="pc-tag tag-green">BUILD</span></div>
               <div class="pc-name">Security Engineering</div>
               <div class="pc-desc">AppSec, cloud security, DevSecOps, IAM, cryptography & secure architecture design.</div>
-              <div class="pc-footer">
-                <div class="pc-meta"><b>30</b> roles · 5 sub-topics</div>
-                <div class="pc-arrow">ENTER →</div>
-              </div>
+              <div class="pc-footer"><div class="pc-meta"><b>30</b> roles · 5 sub-topics</div><div class="pc-arrow">ENTER →</div></div>
             </div>
             <div class="pillar-card p-amber" onclick="showPage('coming')">
-              <div class="pc-top">
-                <span class="pc-icon">📋</span>
-                <span class="pc-tag tag-amber">GOVERN</span>
-              </div>
+              <div class="pc-top"><span class="pc-icon">📋</span><span class="pc-tag tag-amber">GOVERN</span></div>
               <div class="pc-name">GRC</div>
               <div class="pc-desc">Governance, risk management, compliance, auditing, privacy, policy & regulatory frameworks.</div>
-              <div class="pc-footer">
-                <div class="pc-meta"><b>20</b> roles · 3 sub-topics</div>
-                <div class="pc-arrow">ENTER →</div>
-              </div>
+              <div class="pc-footer"><div class="pc-meta"><b>20</b> roles · 3 sub-topics</div><div class="pc-arrow">ENTER →</div></div>
             </div>
             <div class="pillar-card p-purple full-width" onclick="showPage('coming')">
-              <div class="pc-top">
-                <span class="pc-icon">🔍</span>
-                <span class="pc-tag tag-purple">INTEL</span>
-              </div>
+              <div class="pc-top"><span class="pc-icon">🔍</span><span class="pc-tag tag-purple">INTEL</span></div>
               <div class="pc-name">Threat Intelligence & Research</div>
               <div class="pc-desc">CTI analysis, OSINT, APT tracking, dark web monitoring, threat modeling & intelligence automation.</div>
-              <div class="pc-footer">
-                <div class="pc-meta"><b>20</b> roles · 4 sub-topics</div>
-                <div class="pc-arrow">ENTER →</div>
-              </div>
+              <div class="pc-footer"><div class="pc-meta"><b>20</b> roles · 4 sub-topics</div><div class="pc-arrow">ENTER →</div></div>
             </div>
           </div>
         </div>
 
-        <!-- BUILD PROGRESS -->
-        <div class="sec-header">
-          <div class="sec-label">// build progress</div>
-          <div class="sec-line"></div>
-        </div>
+        <div class="sec-header"><div class="sec-label">// build progress</div><div class="sec-line"></div></div>
         <div class="progress-section">
-          <div class="progress-item">
-            <div class="pi-name">Offensive Security</div>
-            <div class="pi-bar-wrap">
-              <div class="pi-track"><div class="pi-fill fill-r" id="bar-1" style="width:0%"></div></div>
-            </div>
-            <div class="pi-count" id="cnt-1">0 / 37</div>
-          </div>
-          <div class="progress-item">
-            <div class="pi-name">Defensive Security</div>
-            <div class="pi-bar-wrap">
-              <div class="pi-track"><div class="pi-fill fill-c" id="bar-2" style="width:0%"></div></div>
-            </div>
-            <div class="pi-count" id="cnt-2">0 / 19</div>
-          </div>
-          <div class="progress-item">
-            <div class="pi-name">Security Engineering</div>
-            <div class="pi-bar-wrap">
-              <div class="pi-track"><div class="pi-fill fill-g" id="bar-3" style="width:0%"></div></div>
-            </div>
-            <div class="pi-count" id="cnt-3">0 / 30</div>
-          </div>
-          <div class="progress-item">
-            <div class="pi-name">GRC</div>
-            <div class="pi-bar-wrap">
-              <div class="pi-track"><div class="pi-fill fill-a" id="bar-4" style="width:0%"></div></div>
-            </div>
-            <div class="pi-count" id="cnt-4">0 / 20</div>
-          </div>
-          <div class="progress-item">
-            <div class="pi-name">Threat Intelligence</div>
-            <div class="pi-bar-wrap">
-              <div class="pi-track"><div class="pi-fill fill-p" id="bar-5" style="width:0%"></div></div>
-            </div>
-            <div class="pi-count" id="cnt-5">0 / 20</div>
-          </div>
+          <div class="progress-item"><div class="pi-name">Offensive Security</div><div class="pi-bar-wrap"><div class="pi-track"><div class="pi-fill fill-r" id="bar-1"></div></div></div><div class="pi-count" id="cnt-1">0 / 37</div></div>
+          <div class="progress-item"><div class="pi-name">Defensive Security</div><div class="pi-bar-wrap"><div class="pi-track"><div class="pi-fill fill-c" id="bar-2"></div></div></div><div class="pi-count" id="cnt-2">0 / 19</div></div>
+          <div class="progress-item"><div class="pi-name">Security Engineering</div><div class="pi-bar-wrap"><div class="pi-track"><div class="pi-fill fill-g" id="bar-3"></div></div></div><div class="pi-count" id="cnt-3">0 / 30</div></div>
+          <div class="progress-item"><div class="pi-name">GRC</div><div class="pi-bar-wrap"><div class="pi-track"><div class="pi-fill fill-a" id="bar-4"></div></div></div><div class="pi-count" id="cnt-4">0 / 20</div></div>
+          <div class="progress-item"><div class="pi-name">Threat Intelligence</div><div class="pi-bar-wrap"><div class="pi-track"><div class="pi-fill fill-p" id="bar-5"></div></div></div><div class="pi-count" id="cnt-5">0 / 20</div></div>
         </div>
 
-        <!-- ROADMAP -->
-        <div class="sec-header">
-          <div class="sec-label">// 7-stage learning roadmap</div>
-          <div class="sec-line"></div>
-        </div>
-        <div class="roadmap-grid" style="margin-bottom:48px;">
+        <div class="sec-header"><div class="sec-label">// 7-stage learning roadmap</div><div class="sec-line"></div></div>
+        <div class="roadmap-grid">
           <div class="rm-stage"><div class="rm-num">01</div><div class="rm-title">Foundations</div></div>
           <div class="rm-stage"><div class="rm-num">02</div><div class="rm-title">App & Network Testing</div></div>
           <div class="rm-stage"><div class="rm-num">03</div><div class="rm-title">Post Exploitation</div></div>
           <div class="rm-stage"><div class="rm-num">04</div><div class="rm-title">Exploit Dev & Tooling</div></div>
           <div class="rm-stage"><div class="rm-num">05</div><div class="rm-title">Adversary Simulation</div></div>
           <div class="rm-stage"><div class="rm-num">06</div><div class="rm-title">Specialization</div></div>
-          <div class="rm-stage"><div class="rm-num">07</div><div class="rm-title">Leadership & Research</div></div>
+          <div class="rm-stage"><div class="rm-num">07</div><div class="rm-title">Leadership</div></div>
         </div>
       </div>
-
       <div class="footer">
         <div>Built by <a href="https://github.com/krakeninfosec" target="_blank">@krakeninfosec</a> · Free forever</div>
-        <div>MIT License · <a href="https://github.com/krakeninfosec/Cybersecurity-Career-Roadmap" target="_blank">GitHub →</a></div>
+        <div><a href="https://github.com/krakeninfosec/Cybersecurity-Career-Roadmap" target="_blank">GitHub →</a></div>
       </div>
     </div>
 
-    <!-- ═══ OFFENSIVE PAGE ═══ -->
+    <!-- OFFENSIVE PAGE -->
     <div class="page" id="page-offensive">
-      <div style="padding:40px 32px;">
+      <div class="off-wrap">
         <div class="pillar-hero">
           <div class="ph-tag">// pillar 01 — offensive security</div>
           <div class="ph-title">Offensive Security</div>
-          <div class="ph-sub">
-            Think like an attacker. Break systems legally and ethically to find weaknesses before real threat actors do. 37 roles from junior pentester to 0-day researcher.
-          </div>
+          <div class="ph-sub">Think like an attacker. Break systems legally and ethically to find weaknesses before real threat actors do. 37 roles from junior pentester to 0-day researcher.</div>
           <div class="ph-badges">
             <span class="ph-badge tag-red">37 ROLES</span>
             <span class="ph-badge tag-red">6 SUB-TOPICS</span>
             <span class="ph-badge tag-red">BEGINNER → EXPERT</span>
-            <span class="ph-badge tag-red">IN PROGRESS</span>
           </div>
         </div>
 
-        <div class="sec-header">
-          <div class="sec-label">// 6 sub-topics</div>
-          <div class="sec-line"></div>
-        </div>
+        <div class="sec-header"><div class="sec-label">// 6 sub-topics</div><div class="sec-line"></div></div>
         <div class="subtopics">
           <div class="st-card">
-            <div class="st-head">
-              <div class="st-name">⚔ 01 · Penetration Testing</div>
-              <div class="st-count">10 roles</div>
-            </div>
-            <div class="st-roles">
-              <span class="role-chip">Junior Pentester</span>
-              <span class="role-chip">Pentester</span>
-              <span class="role-chip">Senior Pentester</span>
-              <span class="role-chip">Web App Tester</span>
-              <span class="role-chip">Mobile Tester</span>
-              <span class="role-chip">Network Pentester</span>
-              <span class="role-chip">Cloud Pentester</span>
-              <span class="role-chip">AD Pentester</span>
-              <span class="role-chip">Offsec Consultant</span>
-              <span class="role-chip">Pentest Manager</span>
-            </div>
+            <div class="st-head"><div class="st-name">⚔ 01 · Penetration Testing</div><div class="st-count">10 roles</div></div>
+            <div class="st-roles"><span class="role-chip">Junior Pentester</span><span class="role-chip">Pentester</span><span class="role-chip">Senior Pentester</span><span class="role-chip">Web App Tester</span><span class="role-chip">Mobile Tester</span><span class="role-chip">Network Pentester</span><span class="role-chip">Cloud Pentester</span><span class="role-chip">AD Pentester</span><span class="role-chip">Offsec Consultant</span><span class="role-chip">Pentest Manager</span></div>
           </div>
           <div class="st-card">
-            <div class="st-head">
-              <div class="st-name">🔴 02 · Red Teaming</div>
-              <div class="st-count">7 roles</div>
-            </div>
-            <div class="st-roles">
-              <span class="role-chip">Red Team Operator</span>
-              <span class="role-chip">Red Team Lead</span>
-              <span class="role-chip">Adversary Sim Specialist</span>
-              <span class="role-chip">C2/Payload Dev</span>
-              <span class="role-chip">Infrastructure Operator</span>
-              <span class="role-chip">Head of Offsec</span>
-              <span class="role-chip">Purple Team Specialist</span>
-            </div>
+            <div class="st-head"><div class="st-name">🔴 02 · Red Teaming</div><div class="st-count">7 roles</div></div>
+            <div class="st-roles"><span class="role-chip">Red Team Operator</span><span class="role-chip">Red Team Lead</span><span class="role-chip">Adversary Sim Specialist</span><span class="role-chip">C2/Payload Dev</span><span class="role-chip">Infrastructure Operator</span><span class="role-chip">Head of Offsec</span><span class="role-chip">Purple Team Specialist</span></div>
           </div>
           <div class="st-card">
-            <div class="st-head">
-              <div class="st-name">🔬 03 · Exploit Research</div>
-              <div class="st-count">9 roles</div>
-            </div>
-            <div class="st-roles">
-              <span class="role-chip">Exploit Developer</span>
-              <span class="role-chip">Vuln Researcher</span>
-              <span class="role-chip">Offsec Engineer</span>
-              <span class="role-chip">Binary Reverse Engineer</span>
-              <span class="role-chip">Malware Analyst</span>
-              <span class="role-chip">0-Day Researcher</span>
-              <span class="role-chip">Exploit QA</span>
-              <span class="role-chip">Crypto/PKI Specialist</span>
-              <span class="role-chip">Covert Channel Researcher</span>
-            </div>
+            <div class="st-head"><div class="st-name">🔬 03 · Exploit Research</div><div class="st-count">9 roles</div></div>
+            <div class="st-roles"><span class="role-chip">Exploit Developer</span><span class="role-chip">Vuln Researcher</span><span class="role-chip">Offsec Engineer</span><span class="role-chip">Binary Reverse Eng</span><span class="role-chip">Malware Analyst</span><span class="role-chip">0-Day Researcher</span><span class="role-chip">Exploit QA</span><span class="role-chip">Crypto/PKI Specialist</span><span class="role-chip">Covert Channel Researcher</span></div>
           </div>
           <div class="st-card">
-            <div class="st-head">
-              <div class="st-name">🔧 04 · Hardware & Specialized</div>
-              <div class="st-count">5 roles</div>
-            </div>
-            <div class="st-roles">
-              <span class="role-chip">Firmware/IoT Researcher</span>
-              <span class="role-chip">Automotive Researcher</span>
-              <span class="role-chip">RF/Wireless Researcher</span>
-              <span class="role-chip">Hardware Security Eng</span>
-              <span class="role-chip">Supply-Chain Researcher</span>
-            </div>
+            <div class="st-head"><div class="st-name">🔧 04 · Hardware & Specialized</div><div class="st-count">5 roles</div></div>
+            <div class="st-roles"><span class="role-chip">Firmware/IoT Researcher</span><span class="role-chip">Automotive Researcher</span><span class="role-chip">RF/Wireless Researcher</span><span class="role-chip">Hardware Security Eng</span><span class="role-chip">Supply-Chain Researcher</span></div>
           </div>
           <div class="st-card">
-            <div class="st-head">
-              <div class="st-name">🎭 05 · Social Eng & Physical</div>
-              <div class="st-count">2 roles</div>
-            </div>
-            <div class="st-roles">
-              <span class="role-chip">Physical Pentester</span>
-              <span class="role-chip">Social Engineering Specialist</span>
-            </div>
+            <div class="st-head"><div class="st-name">🎭 05 · Social Eng & Physical</div><div class="st-count">2 roles</div></div>
+            <div class="st-roles"><span class="role-chip">Physical Pentester</span><span class="role-chip">Social Engineering Specialist</span></div>
           </div>
           <div class="st-card">
-            <div class="st-head">
-              <div class="st-name">📋 06 · Program & Management</div>
-              <div class="st-count">4 roles</div>
-            </div>
-            <div class="st-roles">
-              <span class="role-chip">Bug Bounty Hunter</span>
-              <span class="role-chip">Curriculum Developer</span>
-              <span class="role-chip">Bug Bounty Program Mgr</span>
-              <span class="role-chip">Vuln Disclosure Coordinator</span>
-            </div>
+            <div class="st-head"><div class="st-name">📋 06 · Program & Management</div><div class="st-count">4 roles</div></div>
+            <div class="st-roles"><span class="role-chip">Bug Bounty Hunter</span><span class="role-chip">Curriculum Developer</span><span class="role-chip">Bug Bounty Program Mgr</span><span class="role-chip">Vuln Disclosure Coordinator</span></div>
           </div>
         </div>
 
-        <div class="sec-header">
-          <div class="sec-label">// certifications roadmap</div>
-          <div class="sec-line"></div>
-        </div>
-        <div class="cert-ladder" style="margin-bottom:36px;">
-          <div class="cert-step">
-            <div class="cert-box">
-              <span class="cert-name">eJPT</span>
-              <span class="cert-level">Beginner</span>
-            </div>
-            <div class="cert-arrow">──▶</div>
+        <div class="sec-header"><div class="sec-label">// certifications roadmap</div><div class="sec-line"></div></div>
+        <div class="cert-ladder">
+          <div class="cert-box"><span class="cert-name">eJPT</span><span class="cert-level">Beginner</span></div>
+          <div class="cert-arrow">→</div>
+          <div class="cert-box"><span class="cert-name">PenTest+</span><span class="cert-level">Beginner+</span></div>
+          <div class="cert-arrow">→</div>
+          <div class="cert-box" style="border-color:rgba(0,212,255,0.5);background:rgba(0,212,255,0.08);">
+            <span class="cert-name" style="color:#fff;">OSCP</span><span class="cert-level" style="color:var(--cyan);">Gold Standard</span>
           </div>
-          <div class="cert-step">
-            <div class="cert-box">
-              <span class="cert-name">PenTest+</span>
-              <span class="cert-level">Beginner+</span>
-            </div>
-            <div class="cert-arrow">──▶</div>
-          </div>
-          <div class="cert-step">
-            <div class="cert-box" style="border-color:rgba(0,212,255,0.4);background:rgba(0,212,255,0.08);">
-              <span class="cert-name" style="color:#fff;">OSCP</span>
-              <span class="cert-level" style="color:var(--cyan);">Gold Standard</span>
-            </div>
-            <div class="cert-arrow">──▶</div>
-          </div>
-          <div class="cert-step">
-            <div class="cert-box">
-              <span class="cert-name">CRTO</span>
-              <span class="cert-level">Red Team</span>
-            </div>
-            <div class="cert-arrow">──▶</div>
-          </div>
-          <div class="cert-step">
-            <div class="cert-box">
-              <span class="cert-name">CRTE</span>
-              <span class="cert-level">Advanced AD</span>
-            </div>
-            <div class="cert-arrow">──▶</div>
-          </div>
-          <div class="cert-step">
-            <div class="cert-box">
-              <span class="cert-name">OSED</span>
-              <span class="cert-level">Exploit Dev</span>
-            </div>
-          </div>
+          <div class="cert-arrow">→</div>
+          <div class="cert-box"><span class="cert-name">CRTO</span><span class="cert-level">Red Team</span></div>
+          <div class="cert-arrow">→</div>
+          <div class="cert-box"><span class="cert-name">CRTE</span><span class="cert-level">Advanced AD</span></div>
+          <div class="cert-arrow">→</div>
+          <div class="cert-box"><span class="cert-name">OSED</span><span class="cert-level">Exploit Dev</span></div>
         </div>
 
-        <div class="sec-header">
-          <div class="sec-label">// coming soon — role deep dives</div>
-          <div class="sec-line"></div>
-        </div>
-        <div style="background:rgba(255,60,90,0.04);border:1px solid rgba(255,60,90,0.12);border-radius:6px;padding:20px 22px;margin-bottom:36px;">
-          <div style="font-family:var(--font-mono);font-size:10px;color:var(--red);letter-spacing:2px;margin-bottom:8px;">// IN PROGRESS</div>
-          <div style="font-size:14px;color:var(--text-dim);line-height:1.7;">
-            Each role will get a full page covering: <span style="color:var(--text);">definition, level mapping (trainee→lead), core skills, tools, labs, portfolio projects, certifications, common myths, and next growth path.</span>
-            <br/><br/>Being built daily. Check back soon.
-          </div>
+        <div class="sec-header"><div class="sec-label">// role deep dives — coming soon</div><div class="sec-line"></div></div>
+        <div style="background:rgba(255,60,90,0.04);border:1px solid rgba(255,60,90,0.12);border-radius:6px;padding:22px 24px;margin-bottom:36px;">
+          <div style="font-family:var(--font-mono);font-size:11px;color:var(--red);letter-spacing:2px;margin-bottom:10px;">// IN PROGRESS</div>
+          <div style="font-size:15px;color:var(--text-mid);line-height:1.8;">Each role will get a full deep-dive page: <span style="color:var(--text);">definition, level mapping (trainee → lead), core skills, tools, labs, portfolio projects, certifications, common myths, and next growth path.</span> Being built daily.</div>
         </div>
       </div>
       <div class="footer">
@@ -1393,12 +493,12 @@ body{
       </div>
     </div>
 
-    <!-- ═══ COMING SOON PAGE ═══ -->
+    <!-- COMING SOON -->
     <div class="page" id="page-coming">
-      <div style="padding:80px 32px;text-align:center;">
-        <div style="font-family:var(--font-mono);font-size:10px;color:var(--cyan);letter-spacing:4px;margin-bottom:16px;opacity:0.7;">// LOADING</div>
-        <div style="font-family:var(--font-display);font-size:40px;font-weight:900;color:#fff;margin-bottom:12px;">Coming Soon</div>
-        <div style="font-size:15px;color:var(--text-dim);max-width:400px;margin:0 auto 28px;line-height:1.7;">This section is being built. Check back soon — new content is added daily.</div>
+      <div class="coming-wrap">
+        <div class="coming-tag">// LOADING</div>
+        <div class="coming-title">Coming Soon</div>
+        <div class="coming-desc">This section is being built. New content is added daily. Check back soon.</div>
         <button class="btn btn-outline" onclick="showPage('home')">← Back to Overview</button>
       </div>
     </div>
@@ -1407,131 +507,89 @@ body{
 </div>
 
 <script>
-// ── PARTICLE BACKGROUND ──
-const canvas = document.getElementById('bg-canvas');
-const ctx = canvas.getContext('2d');
-function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
-resizeCanvas();
-window.addEventListener('resize',resizeCanvas);
-
-const pts = Array.from({length:70},()=>({
-  x:Math.random()*window.innerWidth,
-  y:Math.random()*window.innerHeight,
-  vx:(Math.random()-.5)*.25,
-  vy:(Math.random()-.5)*.25,
-  r:Math.random()*1.2+.4,
-  a:Math.random()*.4+.15
-}));
-
-function drawBg(){
+// PARTICLES
+const canvas=document.getElementById('bg-canvas');
+const ctx=canvas.getContext('2d');
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+const pts=Array.from({length:60},()=>({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:Math.random()*1.2+.4,a:Math.random()*.35+.1}));
+function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   pts.forEach((p,i)=>{
-    p.x+=p.vx; p.y+=p.vy;
-    if(p.x<0)p.x=canvas.width;
-    if(p.x>canvas.width)p.x=0;
-    if(p.y<0)p.y=canvas.height;
-    if(p.y>canvas.height)p.y=0;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(0,212,255,${p.a})`;
-    ctx.fill();
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;
+    if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(0,212,255,${p.a})`;ctx.fill();
     for(let j=i+1;j<pts.length;j++){
-      const q=pts[j];
-      const dx=p.x-q.x,dy=p.y-q.y;
-      const d=Math.sqrt(dx*dx+dy*dy);
-      if(d<100){
-        ctx.beginPath();
-        ctx.moveTo(p.x,p.y);
-        ctx.lineTo(q.x,q.y);
-        ctx.strokeStyle=`rgba(0,212,255,${.06*(1-d/100)})`;
-        ctx.lineWidth=.5;
-        ctx.stroke();
-      }
+      const q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<90){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=`rgba(0,212,255,${.05*(1-d/90)})`;ctx.lineWidth=.5;ctx.stroke();}
     }
   });
-  requestAnimationFrame(drawBg);
+  requestAnimationFrame(draw);
 }
-drawBg();
+draw();
 
-// ── TYPING EFFECT ──
-const phrases=[
-  'Think like an attacker.',
-  'Break it before they do.',
-  '126 roles. 5 pillars. 1 wiki.',
-  'From zero to security pro.',
-  'Built by @krakeninfosec.'
-];
+// TYPING
+const phrases=['Think like an attacker.','Break it before they do.','126 roles. 5 pillars. 1 wiki.','From zero to security pro.','Built by @krakeninfosec.'];
 let pi=0,ci=0,del=false;
 function typeIt(){
-  const el=document.getElementById('typed-text');
-  if(!el)return;
+  const el=document.getElementById('typed-text');if(!el)return;
   const ph=phrases[pi];
-  if(!del){el.textContent=ph.slice(0,++ci);if(ci===ph.length){del=true;setTimeout(typeIt,2000);return;}}
+  if(!del){el.textContent=ph.slice(0,++ci);if(ci===ph.length){del=true;setTimeout(typeIt,2200);return;}}
   else{el.textContent=ph.slice(0,--ci);if(ci===0){del=false;pi=(pi+1)%phrases.length;}}
-  setTimeout(typeIt,del?35:65);
+  setTimeout(typeIt,del?38:68);
 }
-setTimeout(typeIt,800);
+setTimeout(typeIt,900);
 
-// ── COUNTER ANIMATION ──
+// COUNTERS
 function countUp(id,target,dur){
-  const el=document.getElementById(id);
-  if(!el)return;
-  let v=0;
-  const step=target/(dur/16);
-  const t=setInterval(()=>{
-    v=Math.min(v+step,target);
-    el.textContent=Math.floor(v);
-    if(v>=target)clearInterval(t);
-  },16);
+  const el=document.getElementById(id);if(!el)return;
+  let v=0;const s=target/(dur/16);
+  const t=setInterval(()=>{v=Math.min(v+s,target);el.textContent=Math.floor(v);if(v>=target)clearInterval(t);},16);
 }
 setTimeout(()=>{
-  countUp('cnt-roles',126,1400);
-  countUp('cnt-pillars',5,600);
-  countUp('cnt-topics',22,1000);
-  countUp('cnt-complete',3,600);
-},300);
+  countUp('cnt-roles',126,1400);countUp('cnt-pillars',5,600);
+  countUp('cnt-topics',22,1000);countUp('cnt-done',3,500);
+},400);
 
-// ── PROGRESS BARS ──
-const bars=[
-  {id:'bar-1',pct:(3/37)*100,cnt:'3 / 37',cid:'cnt-1'},
-  {id:'bar-2',pct:0,cnt:'0 / 19',cid:'cnt-2'},
-  {id:'bar-3',pct:0,cnt:'0 / 30',cid:'cnt-3'},
-  {id:'bar-4',pct:0,cnt:'0 / 20',cid:'cnt-4'},
-  {id:'bar-5',pct:0,cnt:'0 / 20',cid:'cnt-5'},
-];
+// PROGRESS BARS
 setTimeout(()=>{
-  bars.forEach(b=>{
-    const el=document.getElementById(b.id);
-    const cel=document.getElementById(b.cid);
-    if(el)el.style.width=b.pct+'%';
-    if(cel)cel.textContent=b.cnt;
+  [{id:'bar-1',pct:(3/37)*100,cnt:'3 / 37',cid:'cnt-1'},
+   {id:'bar-2',pct:0,cnt:'0 / 19',cid:'cnt-2'},
+   {id:'bar-3',pct:0,cnt:'0 / 30',cid:'cnt-3'},
+   {id:'bar-4',pct:0,cnt:'0 / 20',cid:'cnt-4'},
+   {id:'bar-5',pct:0,cnt:'0 / 20',cid:'cnt-5'}
+  ].forEach(b=>{
+    const el=document.getElementById(b.id);const cel=document.getElementById(b.cid);
+    if(el)el.style.width=b.pct+'%';if(cel)cel.textContent=b.cnt;
   });
-},500);
+},600);
 
-// ── PAGE NAVIGATION ──
+// PAGE NAV
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
+  const pg=document.getElementById('page-'+id);if(pg)pg.classList.add('active');
   document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
-
   const bc=document.getElementById('breadcrumb');
-  const map={
-    home:'<span>~/</span>cybersec-wiki<span>/</span>overview',
-    offensive:'<span>~/</span>cybersec-wiki<span>/</span>01-offensive-security',
-    coming:'<span>~/</span>cybersec-wiki<span>/</span>coming-soon'
-  };
+  const map={home:'<span>~/</span>cybersec-wiki<span>/</span>overview',offensive:'<span>~/</span>cybersec-wiki<span>/</span>01-offensive-security',coming:'<span>~/</span>cybersec-wiki<span>/</span>coming-soon'};
   if(bc&&map[id])bc.innerHTML=map[id];
   window.scrollTo(0,0);
   document.querySelector('.main').scrollTop=0;
 }
 
-// ── NAV ACTIVE STATE ──
-document.querySelectorAll('.nav-link').forEach((link,i)=>{
-  link.addEventListener('click',function(){
-    document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
-    this.classList.add('active');
-  });
-});
+// MOBILE SIDEBAR
+function toggleSidebar(){
+  const s=document.getElementById('sidebar');
+  const h=document.getElementById('hamburger');
+  const o=document.getElementById('overlay');
+  s.classList.toggle('open');h.classList.toggle('open');o.classList.toggle('show');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
 </script>
 </body>
 </html>
