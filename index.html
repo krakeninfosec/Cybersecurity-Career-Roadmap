@@ -214,6 +214,118 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-main);min-hei
 .cert-level{font-size:12px;color:var(--text-dim);}
 .cert-arrow{font-family:var(--font-mono);color:var(--text-dim);padding:0 4px;font-size:14px;opacity:0.4;}
 
+
+/* SUBTOPIC PAGE */
+.sub-hero{padding:36px;background:linear-gradient(135deg,rgba(255,60,90,0.07) 0%,transparent 60%);border:1px solid rgba(255,60,90,0.15);border-radius:8px;margin-bottom:40px;position:relative;overflow:hidden;}
+.back-btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;color:var(--text-dim);cursor:pointer;margin-bottom:18px;transition:color 0.2s;background:none;border:none;padding:0;}
+.back-btn:hover{color:var(--cyan);}
+.sub-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:3px;color:var(--red);opacity:0.8;margin-bottom:10px;}
+.sub-title{font-family:var(--font-display);font-size:30px;font-weight:900;color:#fff;margin-bottom:8px;}
+.sub-desc{font-size:15px;color:var(--text-mid);line-height:1.7;max-width:560px;margin-bottom:18px;}
+.sub-meta{display:flex;gap:16px;flex-wrap:wrap;}
+.sub-meta-item{font-family:var(--font-mono);font-size:11px;color:var(--text-dim);}
+.sub-meta-item b{color:var(--cyan);}
+.roles-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:48px;}
+.role-card{background:rgba(7,20,40,0.7);border:1px solid var(--border);border-radius:8px;padding:22px;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden;}
+.role-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent);opacity:0;transition:opacity 0.3s;}
+.role-card:hover::before{opacity:1;}
+.role-card:hover{border-color:rgba(255,60,90,0.4);transform:translateY(-4px);box-shadow:0 16px 40px rgba(255,60,90,0.1);background:rgba(255,60,90,0.04);}
+.rc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;}
+.rc-level{font-family:var(--font-mono);font-size:9px;padding:3px 9px;border-radius:3px;border:1px solid;letter-spacing:1px;}
+.level-entry{color:#00ff88;border-color:rgba(0,255,136,0.3);background:rgba(0,255,136,0.07);}
+.level-mid{color:var(--cyan);border-color:rgba(0,212,255,0.3);background:rgba(0,212,255,0.07);}
+.level-senior{color:var(--amber);border-color:rgba(255,184,0,0.3);background:rgba(255,184,0,0.07);}
+.level-lead{color:var(--red);border-color:rgba(255,60,90,0.3);background:rgba(255,60,90,0.07);}
+.rc-num{font-family:var(--font-display);font-size:22px;font-weight:900;color:rgba(255,60,90,0.15);line-height:1;}
+.rc-name{font-family:var(--font-display);font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.3;}
+.rc-alt{font-family:var(--font-mono);font-size:10px;color:var(--text-dim);margin-bottom:10px;line-height:1.5;}
+.rc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;}
+.rc-tag{font-size:11px;color:var(--text-dim);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);padding:3px 8px;border-radius:3px;}
+.rc-footer{display:flex;align-items:center;justify-content:space-between;}
+.rc-enter{font-family:var(--font-mono);font-size:10px;color:var(--red);opacity:0;transform:translateX(-6px);transition:all 0.2s;letter-spacing:1px;}
+.role-card:hover .rc-enter{opacity:1;transform:translateX(0);}
+.role-wrap{padding:44px 36px;}
+.role-hero{display:grid;grid-template-columns:1fr 280px;gap:32px;padding:36px;margin-bottom:40px;background:linear-gradient(135deg,rgba(255,60,90,0.06) 0%,transparent 70%);border:1px solid rgba(255,60,90,0.15);border-radius:8px;position:relative;overflow:hidden;}
+.rh-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:3px;color:var(--red);opacity:0.8;margin-bottom:10px;}
+.rh-title{font-family:var(--font-display);font-size:28px;font-weight:900;color:#fff;margin-bottom:6px;line-height:1.2;}
+.rh-alt{font-family:var(--font-mono);font-size:11px;color:var(--text-dim);margin-bottom:14px;line-height:1.6;}
+.rh-desc{font-size:15px;color:var(--text-mid);line-height:1.75;margin-bottom:18px;}
+.rh-badges{display:flex;gap:8px;flex-wrap:wrap;}
+.rh-badge{font-family:var(--font-mono);font-size:10px;padding:4px 12px;border-radius:3px;border:1px solid;letter-spacing:1px;}
+.role-illustration{background:rgba(4,13,26,0.8);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;min-height:200px;position:relative;overflow:hidden;}
+.role-sections{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:40px;}
+.rs-card{background:rgba(7,20,40,0.6);border:1px solid var(--border);border-radius:8px;padding:22px;}
+.rs-card.full{grid-column:span 2;}
+.rs-label{font-family:var(--font-mono);font-size:9px;color:var(--red);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;opacity:0.8;}
+.level-map{display:flex;flex-direction:column;gap:10px;}
+.lm-item{display:flex;align-items:flex-start;gap:12px;padding:12px;border:1px solid var(--border);border-radius:6px;transition:all 0.2s;}
+.lm-item:hover{border-color:rgba(255,60,90,0.3);background:rgba(255,60,90,0.04);}
+.lm-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.lm-content{flex:1;}
+.lm-name{font-family:var(--font-mono);font-size:11px;color:var(--cyan);margin-bottom:3px;letter-spacing:1px;}
+.lm-desc{font-size:13px;color:var(--text-mid);line-height:1.5;}
+.lm-exp{font-family:var(--font-mono);font-size:10px;color:var(--text-dim);margin-top:3px;}
+.skill-list{display:flex;flex-direction:column;gap:12px;}
+.skill-item{}
+.skill-head{display:flex;justify-content:space-between;margin-bottom:5px;}
+.skill-name{font-size:13px;color:var(--text);font-weight:500;}
+.skill-pct{font-family:var(--font-mono);font-size:10px;color:var(--text-dim);}
+.skill-track{height:5px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;}
+.skill-fill{height:100%;border-radius:3px;width:0;transition:width 1.5s cubic-bezier(0.4,0,0.2,1);}
+.sf-red{background:linear-gradient(90deg,rgba(255,60,90,0.5),var(--red));}
+.sf-cyan{background:linear-gradient(90deg,rgba(0,212,255,0.5),var(--cyan));}
+.sf-green{background:linear-gradient(90deg,rgba(0,200,150,0.5),#00c896);}
+.sf-amber{background:linear-gradient(90deg,rgba(255,184,0,0.5),var(--amber));}
+.tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+.tool-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(4,13,26,0.6);border:1px solid var(--border);border-radius:5px;transition:all 0.2s;}
+.tool-item:hover{border-color:rgba(0,212,255,0.3);background:rgba(0,212,255,0.05);}
+.tool-icon{font-size:16px;flex-shrink:0;}
+.tool-name{font-size:13px;color:var(--text);font-weight:500;line-height:1.2;}
+.tool-use{font-size:11px;color:var(--text-dim);}
+.cert-steps{display:flex;flex-direction:column;gap:8px;}
+.cs-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--border);border-radius:5px;transition:all 0.2s;}
+.cs-item:hover{border-color:rgba(0,212,255,0.3);background:rgba(0,212,255,0.04);}
+.cs-step{font-family:var(--font-display);font-size:11px;color:var(--text-dim);width:28px;flex-shrink:0;}
+.cs-name{font-family:var(--font-mono);font-size:13px;color:var(--cyan);font-weight:bold;flex:1;}
+.cs-level{font-size:12px;color:var(--text-dim);}
+.cs-rec{font-family:var(--font-mono);font-size:9px;padding:2px 7px;border-radius:3px;background:rgba(0,255,136,0.08);color:var(--green);border:1px solid rgba(0,255,136,0.2);}
+.myths-list{display:flex;flex-direction:column;gap:10px;}
+.myth-item{display:flex;gap:14px;padding:14px;background:rgba(255,60,90,0.04);border:1px solid rgba(255,60,90,0.1);border-radius:6px;}
+.myth-x{font-size:16px;flex-shrink:0;margin-top:2px;}
+.myth-wrong{font-size:13px;color:var(--red);font-weight:600;margin-bottom:4px;}
+.myth-right{font-size:13px;color:var(--text-mid);line-height:1.5;}
+.next-path{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.np-current{background:rgba(255,60,90,0.1);border:1px solid rgba(255,60,90,0.3);border-radius:6px;padding:12px 18px;text-align:center;}
+.np-name{font-family:var(--font-display);font-size:12px;color:var(--red);font-weight:700;}
+.np-label{font-size:11px;color:var(--text-dim);margin-top:2px;}
+.np-arrow{font-size:20px;color:var(--text-dim);opacity:0.4;}
+.np-next{background:rgba(0,212,255,0.07);border:1px solid rgba(0,212,255,0.2);border-radius:6px;padding:12px 18px;text-align:center;cursor:pointer;transition:all 0.2s;}
+.np-next:hover{border-color:rgba(0,212,255,0.5);background:rgba(0,212,255,0.12);}
+.np-next .np-name{color:var(--cyan);}
+.labs-list{display:flex;flex-direction:column;gap:8px;}
+.lab-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:rgba(4,13,26,0.5);border:1px solid var(--border);border-radius:5px;transition:all 0.2s;}
+.lab-item:hover{border-color:rgba(0,212,255,0.3);background:rgba(0,212,255,0.05);}
+.lab-icon{font-size:15px;flex-shrink:0;}
+.lab-name{font-size:13px;color:var(--text);font-weight:500;flex:1;}
+.lab-tag{font-family:var(--font-mono);font-size:9px;padding:2px 7px;border-radius:3px;border:1px solid;letter-spacing:1px;}
+.lab-free{color:var(--green);border-color:rgba(0,255,136,0.3);background:rgba(0,255,136,0.07);}
+.lab-paid{color:var(--amber);border-color:rgba(255,184,0,0.3);background:rgba(255,184,0,0.07);}
+.lab-both{color:var(--cyan);border-color:rgba(0,212,255,0.3);background:rgba(0,212,255,0.07);}
+.portfolio-list{display:flex;flex-direction:column;gap:10px;}
+.port-item{display:flex;gap:14px;align-items:flex-start;padding:12px 14px;background:rgba(4,13,26,0.5);border:1px solid var(--border);border-radius:5px;}
+.port-num{font-family:var(--font-display);font-size:13px;color:var(--cyan);opacity:0.5;flex-shrink:0;width:22px;}
+.port-name{font-size:14px;color:var(--text);font-weight:600;margin-bottom:3px;}
+.port-desc{font-size:12px;color:var(--text-dim);line-height:1.5;}
+@media(max-width:768px){
+  .role-hero{grid-template-columns:1fr;}
+  .role-sections{grid-template-columns:1fr;}
+  .rs-card.full{grid-column:span 1;}
+  .roles-grid{grid-template-columns:1fr;}
+  .tools-grid{grid-template-columns:1fr;}
+  .role-wrap{padding:24px 18px;}
+  .next-path{flex-direction:column;align-items:flex-start;}
+}
+
 /* COMING SOON */
 .coming-wrap{padding:100px 36px;text-align:center;}
 .coming-tag{font-family:var(--font-mono);font-size:11px;color:var(--cyan);letter-spacing:4px;margin-bottom:18px;opacity:0.7;}
@@ -438,7 +550,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-main);min-hei
 
         <div class="sec-header"><div class="sec-label">// 6 sub-topics</div><div class="sec-line"></div></div>
         <div class="subtopics">
-          <div class="st-card">
+          <div class="st-card" onclick="showPage('pentesting')">
             <div class="st-head"><div class="st-name">⚔ 01 · Penetration Testing</div><div class="st-count">10 roles</div></div>
             <div class="st-roles"><span class="role-chip">Junior Pentester</span><span class="role-chip">Pentester</span><span class="role-chip">Senior Pentester</span><span class="role-chip">Web App Tester</span><span class="role-chip">Mobile Tester</span><span class="role-chip">Network Pentester</span><span class="role-chip">Cloud Pentester</span><span class="role-chip">AD Pentester</span><span class="role-chip">Offsec Consultant</span><span class="role-chip">Pentest Manager</span></div>
           </div>
@@ -490,6 +602,276 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-main);min-hei
       <div class="footer">
         <div>Built by <a href="https://github.com/krakeninfosec" target="_blank">@krakeninfosec</a></div>
         <div><a onclick="showPage('home')" style="cursor:pointer;">← Back to Overview</a></div>
+      </div>
+    </div>
+
+
+    <!-- PENETRATION TESTING SUB-TOPIC PAGE -->
+    <div class="page" id="page-pentesting">
+      <div class="role-wrap">
+        <button class="back-btn" onclick="showPage('offensive')">← Back to Offensive Security</button>
+        <div class="sub-hero">
+          <div class="sub-tag">// offensive security — sub-topic 01</div>
+          <div class="sub-title">Penetration Testing</div>
+          <div class="sub-desc">The core of offensive security. Pentesters legally break into systems to find vulnerabilities before real attackers do. Every engagement ends with a professional report.</div>
+          <div class="sub-meta">
+            <div class="sub-meta-item"><b>10</b> roles</div>
+            <div class="sub-meta-item"><b>Entry → Lead</b> levels</div>
+            <div class="sub-meta-item">Start here if you are <b>new to offensive security</b></div>
+          </div>
+        </div>
+        <div class="sec-header"><div class="sec-label">// 10 roles — click to explore</div><div class="sec-line"></div></div>
+        <div class="roles-grid">
+          <div class="role-card" onclick="showPage('role-junior-pentester')">
+            <div class="rc-top"><span class="rc-level level-entry">ENTRY LEVEL</span><span class="rc-num">01</span></div>
+            <div class="rc-name">Junior Penetration Tester</div>
+            <div class="rc-alt">Jr. Pentester · Entry-level Pen Tester · Pen Test Analyst</div>
+            <div class="rc-tags"><span class="rc-tag">Web Testing</span><span class="rc-tag">Network Basics</span><span class="rc-tag">Reporting</span></div>
+            <div class="rc-footer"><div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dim);">eJPT → OSCP path</div><div class="rc-enter">OPEN →</div></div>
+          </div>
+          <div class="role-card" onclick="showPage('coming')">
+            <div class="rc-top"><span class="rc-level level-mid">MID LEVEL</span><span class="rc-num">02</span></div>
+            <div class="rc-name">Penetration Tester</div>
+            <div class="rc-alt">Pentester · Security Tester · Offensive Security Tester</div>
+            <div class="rc-tags"><span class="rc-tag">Full Pentest</span><span class="rc-tag">Exploitation</span><span class="rc-tag">AD Attacks</span></div>
+            <div class="rc-footer"><div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dim);">OSCP required</div><div class="rc-enter">OPEN →</div></div>
+          </div>
+          <div class="role-card" onclick="showPage('coming')">
+            <div class="rc-top"><span class="rc-level level-senior">SENIOR</span><span class="rc-num">03</span></div>
+            <div class="rc-name">Senior Penetration Tester</div>
+            <div class="rc-alt">Sr. Pentester · Lead Pentester · Principal Pentester</div>
+            <div class="rc-tags"><span class="rc-tag">Complex Engagements</span><span class="rc-tag">Mentoring</span><span class="rc-tag">Research</span></div>
+            <div class="rc-footer"><div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dim);">5+ years exp</div><div class="rc-enter">OPEN →</div></div>
+          </div>
+          <div class="role-card" onclick="showPage('coming')">
+            <div class="rc-top"><span class="rc-level level-mid">MID LEVEL</span><span class="rc-num">04</span></div>
+            <div class="rc-name">Web Application Security Tester</div>
+            <div class="rc-alt">AppSec Tester · Web Pentester · API Security Tester</div>
+            <div class="rc-tags"><span class="rc-tag">OWASP Top 10</span><span class="rc-tag">Burp Suite</span><span class="rc-tag">API Testing</span></div>
+            <div class="rc-footer"><div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dim);">OSWE recommended</div><div class="rc-enter">OPEN →</div></div>
+          </div>
+          <div class="role-card" onclick="showPage('coming')">
+            <div class="rc-top"><span class="rc-level level-mid">MID LEVEL</span><span class="rc-num">05</span></div>
+            <div class="rc-name">Mobile Application Security Tester</div>
+            <div class="rc-alt">Mobile Pentester · Android/iOS AppSec Tester</div>
+            <div class="rc-tags"><span class="rc-tag">Android</span><span class="rc-tag">iOS</span><span class="rc-tag">APK Analysis</span></div>
+            <div class="rc-footer"><div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dim);">Niche but in demand</div><div class="rc-enter">OPEN →</div></div>
+          </div>
+          <div class="role-card" onclick="showPage('coming')">
+            <div class="rc-top"><span class="rc-level level-mid">MID LEVEL</span><span class="rc-num">06</span></div>
+            <div class="rc-name">Network / Infrastructure Pentester</div>
+            <div class="rc-alt">Infra Pentester · External/Internal Network Tester</div>
+            <div class="rc-tags"><span class="rc-tag">Network Scanning</span><span class="rc-tag">Firewall Bypass</span><span class="rc-tag">Pivoting</span></div>
+            <div class="rc-footer"><div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dim);">Most common pentest type</div><div class="rc-enter">OPEN →</div></div>
+          </div>
+          <div class="role-card" onclick="showPage('coming')">
+            <div class="rc-top"><span class="rc-level level-senior">SENIOR</span><span class="rc-num">07</span></div>
+            <div class="rc-name">Cloud Penetration Tester</div>
+            <div class="rc-alt">Cloud Pentester · Cloud Security Assessor</div>
+            <div class="rc-tags"><span class="rc-tag">AWS/Azure/GCP</span><span class="rc-tag">IAM Attacks</span><span class="rc-tag">Serverless</span></div>
+            <div class="rc-footer"><div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dim);">High demand now</div><div class="rc-enter">OPEN →</div></div>
+          </div>
+          <div class="role-card" onclick="showPage('coming')">
+            <div class="rc-top"><span class="rc-level level-senior">SENIOR</span><span class="rc-num">08</span></div>
+            <div class="rc-name">Active Directory / Domain Pentester</div>
+            <div class="rc-alt">AD Pentester · Domain Exploitation Specialist</div>
+            <div class="rc-tags"><span class="rc-tag">BloodHound</span><span class="rc-tag">Kerberoasting</span><span class="rc-tag">DCSync</span></div>
+            <div class="rc-footer"><div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dim);">CRTE recommended</div><div class="rc-enter">OPEN →</div></div>
+          </div>
+          <div class="role-card" onclick="showPage('coming')">
+            <div class="rc-top"><span class="rc-level level-senior">SENIOR</span><span class="rc-num">25</span></div>
+            <div class="rc-name">Offensive Security Consultant</div>
+            <div class="rc-alt">Contract Pentester · PenTest Consultant</div>
+            <div class="rc-tags"><span class="rc-tag">Client Facing</span><span class="rc-tag">All Domains</span><span class="rc-tag">Proposals</span></div>
+            <div class="rc-footer"><div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dim);">Highest pay rate</div><div class="rc-enter">OPEN →</div></div>
+          </div>
+          <div class="role-card" onclick="showPage('coming')">
+            <div class="rc-top"><span class="rc-level level-lead">LEAD</span><span class="rc-num">29</span></div>
+            <div class="rc-name">Pentest Manager / Engagement Manager</div>
+            <div class="rc-alt">Pentest Project Lead · Client Engagement Lead</div>
+            <div class="rc-tags"><span class="rc-tag">Team Management</span><span class="rc-tag">Scoping</span><span class="rc-tag">Delivery</span></div>
+            <div class="rc-footer"><div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dim);">People + technical skills</div><div class="rc-enter">OPEN →</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div>Built by <a href="https://github.com/krakeninfosec" target="_blank">@krakeninfosec</a></div>
+        <div><a onclick="showPage('offensive')" style="cursor:pointer;">← Offensive Security</a></div>
+      </div>
+    </div>
+
+    <!-- JUNIOR PENTESTER ROLE PAGE -->
+    <div class="page" id="page-role-junior-pentester">
+      <div class="role-wrap">
+        <button class="back-btn" onclick="showPage('pentesting')">← Back to Penetration Testing</button>
+        <div class="role-hero">
+          <div>
+            <div class="rh-tag">// offensive · penetration testing · role 01</div>
+            <div class="rh-title">Junior Penetration Tester</div>
+            <div class="rh-alt">Also known as: Jr. Pentester · Entry-level Pen Tester · Pen Test Analyst · Associate Pentester</div>
+            <div class="rh-desc">A Junior Penetration Tester performs authorized security tests on systems, networks, and applications — finding vulnerabilities and writing reports that help organizations fix them before real attackers strike.</div>
+            <div class="rh-badges">
+              <span class="rh-badge tag-red">ENTRY LEVEL</span>
+              <span class="rh-badge tag-green">0–2 YEARS EXP</span>
+              <span class="rh-badge tag-cyan">HIGH DEMAND</span>
+            </div>
+          </div>
+          <div class="role-illustration">
+            <svg viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg" style="padding:14px;">
+              <rect x="10" y="10" width="240" height="170" rx="8" fill="rgba(4,13,26,0.95)" stroke="rgba(0,212,255,0.2)" stroke-width="1"/>
+              <rect x="10" y="10" width="240" height="26" rx="8" fill="rgba(0,212,255,0.07)"/>
+              <rect x="10" y="28" width="240" height="8" fill="rgba(0,212,255,0.07)"/>
+              <circle cx="26" cy="23" r="4" fill="rgba(255,60,90,0.6)"/>
+              <circle cx="40" cy="23" r="4" fill="rgba(255,184,0,0.6)"/>
+              <circle cx="54" cy="23" r="4" fill="rgba(0,255,136,0.6)"/>
+              <text x="80" y="26" font-family="Share Tech Mono" font-size="8" fill="rgba(255,255,255,0.4)">terminal — bash</text>
+              <text x="18" y="56" font-family="Share Tech Mono" font-size="7" fill="rgba(0,212,255,0.8)">$ nmap -sV 192.168.1.1</text>
+              <text x="18" y="70" font-family="Share Tech Mono" font-size="7" fill="rgba(0,255,136,0.7)">PORT     STATE SERVICE</text>
+              <text x="18" y="82" font-family="Share Tech Mono" font-size="7" fill="rgba(255,255,255,0.5)">22/tcp   open  ssh</text>
+              <text x="18" y="94" font-family="Share Tech Mono" font-size="7" fill="rgba(255,255,255,0.5)">80/tcp   open  http</text>
+              <text x="18" y="106" font-family="Share Tech Mono" font-size="7" fill="rgba(255,60,90,0.8)">443/tcp  open  https</text>
+              <text x="18" y="118" font-family="Share Tech Mono" font-size="7" fill="rgba(255,255,255,0.5)">3306/tcp open  mysql</text>
+              <rect x="18" y="130" width="224" height="6" rx="3" fill="rgba(255,255,255,0.04)"/>
+              <rect x="18" y="130" width="0" height="6" rx="3" fill="rgba(0,212,255,0.6)" id="scanBar"/>
+              <text x="18" y="152" font-family="Share Tech Mono" font-size="7" fill="rgba(0,212,255,0.5)">Scanning target...</text>
+              <rect x="18" y="160" width="8" height="9" rx="1" fill="rgba(0,212,255,0.9)" id="termCursor"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="role-sections">
+          <div class="rs-card">
+            <div class="rs-label">// where this role exists</div>
+            <div class="tools-grid" style="grid-template-columns:1fr;">
+              <div class="tool-item"><span class="tool-icon">🏢</span><div><div class="tool-name">Consulting Firms</div><div class="tool-use">Most common entry — Offensive Security, NCC Group, Synack</div></div></div>
+              <div class="tool-item"><span class="tool-icon">🏦</span><div><div class="tool-name">Large Enterprises</div><div class="tool-use">Banks, telcos, healthcare — internal security teams</div></div></div>
+              <div class="tool-item"><span class="tool-icon">🏛️</span><div><div class="tool-name">Government / Defense</div><div class="tool-use">Requires clearance in some countries</div></div></div>
+              <div class="tool-item"><span class="tool-icon">💻</span><div><div class="tool-name">Bug Bounty Platforms</div><div class="tool-use">HackerOne, Bugcrowd — freelance starting point</div></div></div>
+            </div>
+          </div>
+
+          <div class="rs-card">
+            <div class="rs-label">// level mapping</div>
+            <div class="level-map">
+              <div class="lm-item" style="border-color:rgba(0,255,136,0.3);background:rgba(0,255,136,0.04);">
+                <div class="lm-dot" style="background:#00ff88;box-shadow:0 0 6px #00ff88;"></div>
+                <div class="lm-content"><div class="lm-name" style="color:#00ff88;">TRAINEE / INTERN</div><div class="lm-desc">Learning tools, shadowing seniors, basic recon tasks</div><div class="lm-exp">0–6 months</div></div>
+              </div>
+              <div class="lm-item" style="border-color:rgba(0,212,255,0.4);background:rgba(0,212,255,0.06);">
+                <div class="lm-dot" style="background:var(--cyan);box-shadow:0 0 8px var(--cyan);"></div>
+                <div class="lm-content"><div class="lm-name">JUNIOR ← YOU ARE HERE</div><div class="lm-desc">Scoped tests, web app testing, basic network pentests, write reports</div><div class="lm-exp">6 months – 2 years</div></div>
+              </div>
+              <div class="lm-item">
+                <div class="lm-dot" style="background:var(--amber);"></div>
+                <div class="lm-content"><div class="lm-name" style="color:var(--amber);">MID / PENTESTER</div><div class="lm-desc">Full pentest ownership, AD attacks, complex exploits</div><div class="lm-exp">2–4 years</div></div>
+              </div>
+              <div class="lm-item">
+                <div class="lm-dot" style="background:var(--red);"></div>
+                <div class="lm-content"><div class="lm-name" style="color:var(--red);">SENIOR → LEAD</div><div class="lm-desc">Mentoring, research, red team ops, consulting</div><div class="lm-exp">4+ years</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rs-card">
+            <div class="rs-label">// core skills required</div>
+            <div class="skill-list">
+              <div class="skill-item"><div class="skill-head"><span class="skill-name">Networking (TCP/IP, HTTP, DNS)</span><span class="skill-pct">90%</span></div><div class="skill-track"><div class="skill-fill sf-cyan" data-width="90"></div></div></div>
+              <div class="skill-item"><div class="skill-head"><span class="skill-name">Linux Command Line</span><span class="skill-pct">85%</span></div><div class="skill-track"><div class="skill-fill sf-cyan" data-width="85"></div></div></div>
+              <div class="skill-item"><div class="skill-head"><span class="skill-name">Web App Vulnerability Testing</span><span class="skill-pct">80%</span></div><div class="skill-track"><div class="skill-fill sf-red" data-width="80"></div></div></div>
+              <div class="skill-item"><div class="skill-head"><span class="skill-name">Python / Bash Scripting</span><span class="skill-pct">70%</span></div><div class="skill-track"><div class="skill-fill sf-green" data-width="70"></div></div></div>
+              <div class="skill-item"><div class="skill-head"><span class="skill-name">Report Writing</span><span class="skill-pct">75%</span></div><div class="skill-track"><div class="skill-fill sf-amber" data-width="75"></div></div></div>
+              <div class="skill-item"><div class="skill-head"><span class="skill-name">Windows / Active Directory Basics</span><span class="skill-pct">65%</span></div><div class="skill-track"><div class="skill-fill sf-red" data-width="65"></div></div></div>
+            </div>
+          </div>
+
+          <div class="rs-card">
+            <div class="rs-label">// tools used</div>
+            <div class="tools-grid">
+              <div class="tool-item"><span class="tool-icon">🗺️</span><div><div class="tool-name">Nmap</div><div class="tool-use">Network scanning</div></div></div>
+              <div class="tool-item"><span class="tool-icon">🕷️</span><div><div class="tool-name">Burp Suite</div><div class="tool-use">Web app testing</div></div></div>
+              <div class="tool-item"><span class="tool-icon">💣</span><div><div class="tool-name">Metasploit</div><div class="tool-use">Exploitation framework</div></div></div>
+              <div class="tool-item"><span class="tool-icon">🔍</span><div><div class="tool-name">Gobuster</div><div class="tool-use">Directory brute forcing</div></div></div>
+              <div class="tool-item"><span class="tool-icon">📡</span><div><div class="tool-name">Wireshark</div><div class="tool-use">Traffic analysis</div></div></div>
+              <div class="tool-item"><span class="tool-icon">🔑</span><div><div class="tool-name">Hydra</div><div class="tool-use">Password attacks</div></div></div>
+              <div class="tool-item"><span class="tool-icon">🐉</span><div><div class="tool-name">Kali Linux</div><div class="tool-use">Pentest OS</div></div></div>
+              <div class="tool-item"><span class="tool-icon">🕸️</span><div><div class="tool-name">Nikto</div><div class="tool-use">Web vuln scanner</div></div></div>
+            </div>
+          </div>
+
+          <div class="rs-card">
+            <div class="rs-label">// labs & practice platforms</div>
+            <div class="labs-list">
+              <div class="lab-item"><span class="lab-icon">🟢</span><span class="lab-name">TryHackMe</span><span class="lab-tag lab-both">FREE / PAID</span></div>
+              <div class="lab-item"><span class="lab-icon">⬛</span><span class="lab-name">Hack The Box</span><span class="lab-tag lab-both">FREE / PAID</span></div>
+              <div class="lab-item"><span class="lab-icon">🟠</span><span class="lab-name">PortSwigger Web Academy</span><span class="lab-tag lab-free">FREE</span></div>
+              <div class="lab-item"><span class="lab-icon">🔵</span><span class="lab-name">PentesterLab</span><span class="lab-tag lab-both">FREE / PAID</span></div>
+              <div class="lab-item"><span class="lab-icon">🔴</span><span class="lab-name">TCM Security Academy</span><span class="lab-tag lab-paid">PAID</span></div>
+              <div class="lab-item"><span class="lab-icon">⚪</span><span class="lab-name">VulnHub</span><span class="lab-tag lab-free">FREE</span></div>
+            </div>
+          </div>
+
+          <div class="rs-card">
+            <div class="rs-label">// portfolio & project ideas</div>
+            <div class="portfolio-list">
+              <div class="port-item"><div class="port-num">01</div><div><div class="port-name">Complete Web App Pentest Report</div><div class="port-desc">Test a VulnHub or HackTheBox machine, write a full professional report with findings, severity ratings and remediation steps.</div></div></div>
+              <div class="port-item"><div class="port-num">02</div><div><div class="port-name">Network Pentest Report</div><div class="port-desc">Set up a home lab with vulnerable VMs, perform a full internal network test and document everything.</div></div></div>
+              <div class="port-item"><div class="port-num">03</div><div><div class="port-name">CTF Write-ups on GitHub/Blog</div><div class="port-desc">Solve 10+ CTF challenges and write clear technical explanations. Shows methodology and communication skills.</div></div></div>
+              <div class="port-item"><div class="port-num">04</div><div><div class="port-name">Custom Recon Script</div><div class="port-desc">Build a Python or Bash recon automation tool. Shows scripting ability beyond just running tools.</div></div></div>
+            </div>
+          </div>
+
+          <div class="rs-card full">
+            <div class="rs-label">// certifications — practical order</div>
+            <div class="cert-steps">
+              <div class="cs-item">
+                <div class="cs-step">01</div>
+                <div class="cs-name">eJPT</div>
+                <div class="cs-level">eLearnSecurity Junior Pentester — Start here. Practical, affordable, beginner friendly.</div>
+                <div class="cs-rec">START HERE</div>
+              </div>
+              <div class="cs-item">
+                <div class="cs-step">02</div>
+                <div class="cs-name">CompTIA PenTest+</div>
+                <div class="cs-level">Good for job applications, especially in enterprise environments.</div>
+              </div>
+              <div class="cs-item" style="border-color:rgba(0,212,255,0.3);background:rgba(0,212,255,0.04);">
+                <div class="cs-step" style="color:var(--cyan);">03</div>
+                <div class="cs-name" style="color:#fff;">OSCP</div>
+                <div class="cs-level" style="color:var(--cyan);">Offensive Security Certified Professional — Industry gold standard. Required by most employers.</div>
+                <div class="cs-rec">GOLD STANDARD</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rs-card full">
+            <div class="rs-label">// common myths & brutal truth</div>
+            <div class="myths-list">
+              <div class="myth-item"><div class="myth-x">✗</div><div><div class="myth-wrong">"I just need to learn Metasploit and I am a hacker"</div><div class="myth-right">Metasploit is one tool. Real pentesters understand what happens underneath every exploit. Start with fundamentals, not frameworks.</div></div></div>
+              <div class="myth-item"><div class="myth-x">✗</div><div><div class="myth-wrong">"CEH is enough to get hired"</div><div class="myth-right">CEH is theory-heavy and widely considered weak by hiring managers. eJPT or OSCP carries far more weight.</div></div></div>
+              <div class="myth-item"><div class="myth-x">✗</div><div><div class="myth-wrong">"Report writing is not important — finding bugs is what matters"</div><div class="myth-right">A finding you cannot explain clearly is worthless to a client. Juniors who write clean reports get promoted faster.</div></div></div>
+              <div class="myth-item"><div class="myth-x">✗</div><div><div class="myth-wrong">"I need a degree in computer science first"</div><div class="myth-right">Most practicing pentesters are self-taught. Labs, certs and a strong portfolio matter far more than a degree.</div></div></div>
+            </div>
+          </div>
+
+          <div class="rs-card full">
+            <div class="rs-label">// next growth path</div>
+            <div class="next-path">
+              <div class="np-current"><div class="np-name">JR. PENTESTER</div><div class="np-label">You are here</div></div>
+              <div class="np-arrow">→</div>
+              <div class="np-next" onclick="showPage('coming')"><div class="np-name">PENTESTER</div><div class="np-label">Mid · 2–4 yrs</div></div>
+              <div class="np-arrow">→</div>
+              <div class="np-next" onclick="showPage('coming')"><div class="np-name">SENIOR PENTESTER</div><div class="np-label">Senior · 4–6 yrs</div></div>
+              <div class="np-arrow">→</div>
+              <div class="np-next" onclick="showPage('coming')"><div class="np-name">RED TEAM OPERATOR</div><div class="np-label">Specialize · 5+ yrs</div></div>
+              <div class="np-arrow">→</div>
+              <div class="np-next" onclick="showPage('coming')"><div class="np-name">LEAD / CONSULTANT</div><div class="np-label">Expert · 7+ yrs</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div>Built by <a href="https://github.com/krakeninfosec" target="_blank">@krakeninfosec</a></div>
+        <div><a onclick="showPage('pentesting')" style="cursor:pointer;">← Penetration Testing</a></div>
       </div>
     </div>
 
@@ -572,10 +954,23 @@ function showPage(id){
   const pg=document.getElementById('page-'+id);if(pg)pg.classList.add('active');
   document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
   const bc=document.getElementById('breadcrumb');
-  const map={home:'<span>~/</span>cybersec-wiki<span>/</span>overview',offensive:'<span>~/</span>cybersec-wiki<span>/</span>01-offensive-security',coming:'<span>~/</span>cybersec-wiki<span>/</span>coming-soon'};
+  const map={
+    home:'<span>~/</span>cybersec-wiki<span>/</span>overview',
+    offensive:'<span>~/</span>cybersec-wiki<span>/</span>01-offensive-security',
+    pentesting:'<span>~/</span>cybersec-wiki<span>/</span>offensive<span>/</span>penetration-testing',
+    'role-junior-pentester':'<span>~/</span>cybersec-wiki<span>/</span>offensive<span>/</span>pentesting<span>/</span>junior-pentester',
+    coming:'<span>~/</span>cybersec-wiki<span>/</span>coming-soon'
+  };
   if(bc&&map[id])bc.innerHTML=map[id];
   window.scrollTo(0,0);
   document.querySelector('.main').scrollTop=0;
+  if(id==='role-junior-pentester'){
+    setTimeout(()=>{
+      document.querySelectorAll('.skill-fill').forEach(el=>{el.style.width=el.dataset.width+'%';});
+      const bar=document.getElementById('scanBar');
+      if(bar){let w=0;const t=setInterval(()=>{w+=3;bar.setAttribute('width',w*2.24);if(w>=100)clearInterval(t);},25);}
+    },300);
+  }
 }
 
 // MOBILE SIDEBAR
